@@ -10,14 +10,13 @@
 		this.line = 0;					// Top position of dropping piece
 		this.leftPos = 3;				// Left position of dropping piece
 		this.colors = [
-			[228,77,66],
-			[239,195,48],
-			[58,153,216],
-			[154,93,180],
-			[41,187,156],
-			[36,125,40],
-			[57,203,116]
-		];
+			[46,204,113],
+			[52,152,219],
+			[26,188,156],
+			[241,196,15],
+			[30,126,34],
+			[231,76,60],
+			[155,89,182]];
 		this.score = 0;					// Score
 		this.totalLines	 = 0;			// Lines cleared
 		this.rotation = 0;				// Rotation of dropping piece
