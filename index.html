@@ -11,21 +11,40 @@
 </head>
 
 <body>
-
-	<div class="tetris">
-	    <canvas></canvas>
-	    <div class="tetris-score-container">Score <span></span></div>
-	    <div class="tetris-lines-container">Lines <span></span></div>
-		<div class="tetris-level-container">Level <span></span></div>
-	    <div class="tetris-touch-point-container">
-	        <div class="tetris-touch-control-right"></div>
-	        <div class="tetris-touch-control-left"></div>
-	        <div class="tetris-touch-control-drop"></div>
-	        <div class="tetris-touch-control-rotate"></div>
-	    </div>
+	<!-- Home / -->
+	<div class="page home">
+		<h1>
+			<pre>
+_______________█____
+_███_█__███_██_█__██
+__█__██__█__█__█_██_
+_____█______█__█____
+			</pre>
+		</h1>
+		<a href="#" class="btn btn-start" data-action="start">Start</a>
 	</div>
+	<!-- / Home -->
 
-	<div class="game-over">Kiiiiiiiiiky kiky kiky kikyyyyyy</div>
+	<!-- Gamefield / -->
+	<div class="page tetris">
+		<a href="#" class="btn btn-pause" data-action="start">Pause</a>
+		<a href="#" class="btn btn-restart" data-action="start">Clear</a>
+		<div class="gamefield-container">
+		    <canvas></canvas>
+		    <div class="tetris-score-container">Score <span></span></div>
+		    <div class="tetris-lines-container">Lines <span></span></div>
+			<div class="tetris-level-container">Level <span></span></div>
+		    <div class="tetris-touch-point-container">
+		        <div class="tetris-touch-control-right"></div>
+		        <div class="tetris-touch-control-left"></div>
+		        <div class="tetris-touch-control-drop"></div>
+		        <div class="tetris-touch-control-rotate"></div>
+		    </div>
+		</div>
+		<div class="game-over">Game over</div>
+	</div>
+	<!-- / Gamefield -->
+
 
 <script src="js/tetris.js"></script>
 

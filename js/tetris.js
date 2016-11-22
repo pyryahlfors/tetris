@@ -21,6 +21,7 @@
 		this.totalLines	 = 0;			// Lines cleared
 		this.rotation = 0;				// Rotation of dropping piece
 		this.gamespeed = 500;			// Game speed in milliseconds
+		this.speedLevel = 500;
 		this.nextBlock = false;			// not implemented yet
 		this.paused = false;
 
@@ -35,7 +36,8 @@
 			document.body.addEventListener('touchmove', function(e){e.preventDefault();}, false);
 		}
 
-		var testY = Math.floor(window.innerHeight/(this.gameFieldHeight+1));
+		var thisGameContainer = document.querySelector('.page.tetris .gamefield-container').getBoundingClientRect();
+		var testY = Math.floor(thisGameContainer.height/(this.gameFieldHeight+1));
 
 		this.blockHeight = testY;
 		this.blockWidth = testY;
@@ -106,10 +108,9 @@
 		this.canvasContainer.style.background = "#222";
 
 		this.dropRowPossible = 0;
-		this.init();
 		};
 
-	tetris.prototype.init = function() {
+	tetris.prototype.resetGamefield = function(){
 		var i = 0;
 		// Create arrays for game state and set everything to 0
 		this.combinedField	= [];	// Combined [blockfield + gamefield] (for 'collision detect')
@@ -123,6 +124,10 @@
 				i++;
 				}
 			}
+		};
+
+	tetris.prototype.init = function() {
+		this.resetGamefield();
 
 		// Add event listener for keyboard
 		/*
@@ -375,6 +380,18 @@
 			}
 		};
 
+	tetris.prototype.pauseGame = function(){
+		if(!this.paused) {
+			clearInterval(this.timer);
+			this.paused = true;
+			}
+		else{
+			clearInterval(this.timer);
+			this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
+			this.paused = false;
+			}
+		};
+
 	// Clear timeout when dashboard window is closed
 	tetris.prototype.kill = function(){
 		var x = this.keyboardListener;
@@ -404,5 +421,25 @@
 
 	}());
 
-	new tetris();
+	window.tetris = new tetris();
 })();
+
+
+/* move this somewhere else later */
+var btnStart = document.querySelector('.btn-start');
+var btnRestart = document.querySelector('.btn-restart');
+var btnPause = document.querySelector('.btn-pause');
+
+btnStart.addEventListener('click', function(){
+	document.querySelector('.page.home').classList.add('hidden');
+	tetris.init();
+//	tetris.pauseGame();
+}, false);
+
+btnPause.addEventListener('click', function(){
+	tetris.pauseGame();
+}, false);
+
+btnRestart.addEventListener('click', function(){
+	tetris.resetGamefield();
+}, false);
