@@ -3,6 +3,17 @@ body,html  {
 	width		: 100vw;
 	height		: 100vh;
 	overflow: hidden;
+	-ms-touch-action: none;
+	-ms-scroll-chaining: none;
+	-ms-scroll-limit-y-max: auto;
+	-ms-scroll-translation: vertical-to-horizontal
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;	
 	}
 
 .tetris {
