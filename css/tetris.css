@@ -13,7 +13,8 @@ body,html  {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-o-user-select: none;
-	user-select: none;	
+	user-select: none;
+	font-family: sans-serif;
 	}
 
 .tetris {
@@ -41,6 +42,22 @@ body,html  {
 	position: absolute;
 	top: 40px;
 	right: 20px;
+}
+
+
+.tetris-level-container {
+	position: absolute;
+	top: 60px;
+	right: 20px;
+}
+
+.tetris-score-container,
+.tetris-lines-container,
+.tetris-level-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 200px;
 }
 
 

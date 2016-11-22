@@ -84,8 +84,9 @@
 
 		// Create container
 		this.container = document.querySelector('.tetris');
-		this.scoreContainer = document.querySelector('.tetris-score-container');
-		this.linesContainer = document.querySelector('.tetris-lines-container');
+		this.scoreContainer = document.querySelector('.tetris-score-container SPAN');
+		this.linesContainer = document.querySelector('.tetris-lines-container SPAN');
+		this.levelContainer = document.querySelector('.tetris-level-container SPAN');
 
 		// Create touch points container
 		this.touchPointsContainer = document.querySelector('.tetris-touch-point-container');
@@ -361,8 +362,16 @@
 		if(lines > 0){
 			this.score+= Math.pow(lines, 2)* 10;
 			this.totalLines+= lines;
+			this.level = 1 + Math.floor(this.totalLines/10);
+			this.speedLevel = this.gamespeed-Math.floor(this.totalLines/10)*20;
+			clearInterval(this.timer);
+			this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
+
 			this.scoreContainer.innerHTML = this.score;
 			this.linesContainer.innerHTML = this.totalLines;
+			this.levelContainer.innerHTML = this.level;
+//			if(totalLines/)
+
 			}
 		};
 
