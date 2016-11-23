@@ -2,7 +2,7 @@
 	// Tetris
 	var tetris = function(){
 		this.gameFieldWidth = 9;		// Width of the game field (original tetris has 20x10, so lets use those)
-		this.gameFieldHeight = 19;		// Height of the game field
+		this.gameFieldHeight = 15;		// Height of the game field
 		this.blockHeight = 16;			// Single block piece height in pixels
 		this.blockWidth = 16;			// Single block piece width in pixels
 		this.blockArrayWidth = 3;		// Size of block container
@@ -105,8 +105,6 @@
 		this.canvasContainerCTX = this.canvasContainer.getContext('2d');
 		this.canvasContainer.setAttribute("WIDTH", this.levelWidth);
 		this.canvasContainer.setAttribute("HEIGHT", this.levelHeight);
-		this.canvasContainer.style.background = "#222";
-
 		this.dropRowPossible = 0;
 		};
 
