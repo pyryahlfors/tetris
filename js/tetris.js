@@ -22,6 +22,12 @@
 		this.rotation = 0;				// Rotation of dropping piece
 		this.gamespeed = 500;			// Game speed in milliseconds
 		this.speedLevel = 500;
+		this.defaults = {
+			speed: 500,
+			score: 0,
+			totalLines: 0,
+			line : 0
+		}
 		this.nextBlock = false;			// not implemented yet
 		this.paused = false;
 
@@ -114,6 +120,12 @@
 		this.combinedField	= [];	// Combined [blockfield + gamefield] (for 'collision detect')
 		this.blockfield	= [];		// Contains single block (current falling block)
 		this.gameField	= [];		// Contains all dropped blocks
+
+		this.gamespeed = this.defaults.speed;
+		this.score = this.defaults.score;
+		this.totalLines = 0;
+		this.line = -2*(this.gameFieldWidth+1); // Start from below the gamefield
+
 		for(var y=0;y<=this.gameFieldHeight;y++) {
 			for(var x=0; x<=this.gameFieldWidth;x++) {
 				this.gameField[i] = 0;
@@ -131,21 +143,26 @@
 		/*
 			Since we want to remove event listener after window is closed make it variable
 		*/
-		var self = this;
-		var z = this.keyInput.bind(this);
-		this.keyboardListener = z;
+		if(!this.hasInputsBound){
+			var self = this;
+			var z = this.keyInput.bind(this);
+			this.keyboardListener = z;
 
-		document.addEventListener('keydown', z, false);
+			document.addEventListener('keydown', z, false);
 
-		this.touchCTRLRight.addEventListener(this.touchEvent, function(){this.moveRight();}.bind(self), false);
-				this.touchCTRLLeft.addEventListener(this.touchEvent, function(){this.moveLeft();}.bind(self), false);
-				this.touchCTRLRotate.addEventListener(this.touchEvent, function(){this.rotate();}.bind(self), false);
-				this.touchCTRLDrop.addEventListener(this.touchEvent, function(){this.dropBlock();}.bind(self), false);
+			this.touchCTRLRight.addEventListener(this.touchEvent, function(){this.moveRight();}.bind(self), false);
+			this.touchCTRLLeft.addEventListener(this.touchEvent, function(){this.moveLeft();}.bind(self), false);
+			this.touchCTRLRotate.addEventListener(this.touchEvent, function(){this.rotate();}.bind(self), false);
+			this.touchCTRLDrop.addEventListener(this.touchEvent, function(){this.dropBlock();}.bind(self), false);
+
+			this.hasInputsBound = true;
+			}
+
 		// Randomize block
 		this.randomizeBlock();
 
 		// Start timer
-		this.timer = setInterval(function(){self.dropBlock();}.bind(self), this.gamespeed);
+		this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.gamespeed);
 		};
 
 	tetris.prototype.moveLeft = function(){
@@ -425,6 +442,7 @@
 
 /* move this somewhere else later */
 var btnStart = document.querySelector('.btn-start');
+var btnHome = document.querySelector('.btn-home');
 var btnRestart = document.querySelector('.btn-restart');
 var btnPause = document.querySelector('.btn-pause');
 
@@ -440,4 +458,11 @@ btnPause.addEventListener('click', function(){
 
 btnRestart.addEventListener('click', function(){
 	tetris.resetGamefield();
+}, false);
+
+btnHome.addEventListener('click', function(){
+	clearInterval(tetris.timer);
+	delete(tetris.timer);
+	tetris.resetGamefield();
+	document.querySelector('.page.home').classList.remove('hidden');
 }, false);
