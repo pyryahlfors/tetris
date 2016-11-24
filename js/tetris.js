@@ -151,10 +151,22 @@
 
 			document.addEventListener('keydown', z, false);
 
-			this.touchCTRLRight.addEventListener(this.touchEvent, function(){this.moveRight();}.bind(self), false);
-			this.touchCTRLLeft.addEventListener(this.touchEvent, function(){this.moveLeft();}.bind(self), false);
-			this.touchCTRLRotate.addEventListener(this.touchEvent, function(){this.rotate();}.bind(self), false);
-			this.touchCTRLDrop.addEventListener(this.touchEvent, function(){this.dropBlock();}.bind(self), false);
+			this.touchCTRLRight.addEventListener(this.touchEvent, function(){
+				if(this.paused) {return;}
+				this.moveRight();
+			}.bind(self), false);
+			this.touchCTRLLeft.addEventListener(this.touchEvent, function(){
+				if(this.paused) {return;}
+				this.moveLeft();
+			}.bind(self), false);
+			this.touchCTRLRotate.addEventListener(this.touchEvent, function(){
+				if(this.paused) {return;}
+				this.rotate();
+			}.bind(self), false);
+			this.touchCTRLDrop.addEventListener(this.touchEvent, function(){
+				if(this.paused) {return;}
+				this.dropBlock();
+			}.bind(self), false);
 
 			this.hasInputsBound = true;
 			}
