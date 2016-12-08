@@ -43,10 +43,7 @@ body,html  {
 }
 
 .scores{
-width:100%;
-position:absolute;
-padding:8px;
-
+width:100%; position:absolute; padding:8px;
 display: -webkit-box; display: -ms-flexbox; display: flex;
 -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
 -webkit-box-align: center;-ms-flex-align: center; align-items: center;
@@ -70,6 +67,7 @@ width:90px;
 	display: -webkit-box; display: -ms-flexbox; display: flex;
 	-webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
 	-webkit-box-align: center;-ms-flex-align: center; align-items: center;
+	-webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column;
 }
 .tetris{
 }
@@ -146,6 +144,7 @@ width:90px;
 }
 .btn  {
 	background:black;
+	line-height:24px;
 	color: rgba(255,255,255,.7);
 	padding: 8px;
 	float:left;
@@ -154,6 +153,9 @@ width:90px;
 	display: -webkit-box; display: -ms-flexbox; display: flex;
 }
 .btn-pause, .btn-restart, .btn-home{	background: rgba(255,255,255,.1); }
+
+.btn-start{padding:16px 32px; color:#fff; background-color:#0075DB; border-radius:56px; font-size:18px; box-shadow:0 0 48px rgba(0, 0, 0, 0.2); margin-top:48px; transition: all .3s ease; font-weight:500;}
+.btn-start:hover{background-color:#007DEA;}
 
 h1 {text-align: center; font-size: .8em}
 h1 pre {
