@@ -2,7 +2,7 @@
 	// Tetris
 	var tetris = function(){
 		this.gameFieldWidth = 9;		// Width of the game field (original tetris has 20x10, so lets use those)
-		this.gameFieldHeight = 15;		// Height of the game field
+		this.gameFieldHeight = 19;		// Height of the game field
 		this.blockHeight = 16;			// Single block piece height in pixels
 		this.blockWidth = 16;			// Single block piece width in pixels
 		this.blockArrayWidth = 3;		// Size of block container
@@ -122,8 +122,9 @@
 		this.gameField	= [];		// Contains all dropped blocks
 
 		this.gamespeed = this.defaults.speed;
-		this.score = this.defaults.score;
+		this.score = 0;
 		this.totalLines = 0;
+		this.leftPos = 3;
 		this.line = -2*(this.gameFieldWidth+1); // Start from below the gamefield
 
 		for(var y=0;y<=this.gameFieldHeight;y++) {
