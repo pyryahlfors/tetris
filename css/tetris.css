@@ -1,3 +1,5 @@
+@import 'touch.css';
+
 * {
     padding: 0;
     margin: 0;
@@ -25,6 +27,7 @@ body, html {
     -o-user-select: none;
     user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: #000;
 }
 
 *, *:after, *:before {
@@ -98,7 +101,7 @@ body, html {
 
 .game-controls {
     position: absolute;
-    bottom: 0;
+    top: 0;
     width: 100%;
     padding: 8px;
 }
@@ -126,68 +129,21 @@ body, html {
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
-    background: #734523;
+    background: #000;
     top: 0px;
     bottom: 0px;
 }
 
 .tetris canvas {
     position: absolute;
-    background: #E0EAFC;
-    /* fallback for old browsers */
+    background: #111;
+/*
     background: -webkit-linear-gradient(to top, #E0EAFC, #CFDEF3);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, #E0EAFC, #CFDEF3);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-bottom: 8px solid #78AB46;
+    */
+    border-bottom: 8px solid #333;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.tetris-touch-point-container {
-    width: 200vw;
-    height: 200vw;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%) rotate(45deg) ;
-}
-
-.tetris-touch-point-container .tetris-touch-control-right {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 0%;
-    left: 50%;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .3);
-    background: rgba(255,0,0,.1)
-}
-
-.tetris-touch-point-container .tetris-touch-control-left {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 50%;
-    left: 0%;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .3)
-}
-
-.tetris-touch-point-container .tetris-touch-control-drop {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 50%;
-    left: 50%;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .3)
-}
-
-.tetris-touch-point-container .tetris-touch-control-rotate {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 0%;
-    left: 0%;
-    box-shadow: 0 0 1px rgba(0, 0, 0, .3)
 }
 
 .game-over {
@@ -219,22 +175,6 @@ body, html {
 }
 
 .btn {
-    color: rgba(255, 255, 255, .7);
-    padding: 8px;
-    float: left;
-    text-decoration: none;
-    border-radius: 4px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-h1 {
-    text-align: center;
-    font-size: .8em
-}
-
-.btn {
     line-height: 24px;
     color: rgba(255, 255, 255, .7);
     padding: 8px;
@@ -246,8 +186,8 @@ h1 {
     display: flex;
 }
 
-.btn-restart, .btn-home {
-  display: none;
+.btn-restart {
+    display: none;
     background: rgba(255, 255, 255, .1);
 }
 
@@ -266,14 +206,4 @@ h1 {
 
 .btn-start:hover {
     background-color: #007DEA;
-}
-
-h1 {
-    text-align: center;
-    font-size: .8em
-}
-
-h1 pre {
-    display: inline-block;
-    line-height: .8em
 }

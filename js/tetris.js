@@ -3,20 +3,28 @@
 	var tetris = function(){
 		this.gameFieldWidth = 9;		// Width of the game field (original tetris has 20x10, so lets use those)
 		this.gameFieldHeight = 19;		// Height of the game field
-		this.blockHeight = 16;			// Single block piece height in pixels
-		this.blockWidth = 16;			// Single block piece width in pixels
 		this.blockArrayWidth = 3;		// Size of block container
 		this.blockArrayHeight = 3;		// Size of block container
 		this.line = 0;					// Top position of dropping piece
 		this.leftPos = 3;				// Left position of dropping piece
 		this.colors = [
+			[255,40,55,1],
+			[255,255,255,0.10],
+			[255,255,255,0.15],
+			[255,255,255,0.20],
+			[255,255,255,0.25],
+			[255,255,255,0.30],
+			[255,255,255,0.35]
+/*
 			[46,204,113],
 			[52,152,219],
 			[26,188,156],
 			[241,196,15],
 			[30,126,34],
 			[231,76,60],
-			[155,89,182]];
+			[155,89,182]
+		*/
+];
 		this.score = 0;					// Score
 		this.totalLines	 = 0;			// Lines cleared
 		this.rotation = 0;				// Rotation of dropping piece
@@ -143,6 +151,7 @@
 		this.score = 0;
 		this.totalLines = 0;
 		this.leftPos = 3;
+		this.dropRowPossible = 0;
 		this.line = -2*(this.gameFieldWidth+1); // Start from below the gamefield
 
 		for(var y=0;y<=this.gameFieldHeight;y++) {
@@ -153,6 +162,8 @@
 				i++;
 				}
 			}
+		this.drawGameField();
+		this.clearTempArray();
 		};
 
 	tetris.prototype.init = function() {
@@ -349,7 +360,7 @@
 					var xx = x*this.blockWidth;
 					this.canvasContainerCTX.beginPath();
 					this.canvasContainerCTX.moveTo(xx, yy);
-					this.canvasContainerCTX.fillStyle = "rgb("+this.colors[drawBlock-1]+")";
+					this.canvasContainerCTX.fillStyle = "rgba("+this.colors[drawBlock-1]+")";
 					this.canvasContainerCTX.fillRect(xx, yy, this.blockWidth, this.blockHeight);
 					}
 				i++;
@@ -373,10 +384,15 @@
 		tetris.prototype.dropBlock = function() {
 			window.requestAnimationFrame(function() {
 				if(this.line < 0 && this.dropRowPossible > 0) {
-						clearInterval(this.timer);
-						document.querySelector('.game-over').classList.add('visible');
+					clearInterval(this.timer);
+					delete(tetris.timer);
+					document.querySelector('.game-over').classList.add('visible');
 					}
-				if (this.dropRowPossible >= 1 || this.combinedNext === undefined){
+				else if(this.dropRowPossible >= 1 || this.combinedNext === undefined){
+					// Clear timer also when user clicks down
+					clearInterval(this.timer);
+					delete(this.timer);
+					this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
 					this.line = -2*(this.gameFieldWidth+1); // Start from below the gamefield
 					this.rotation = 1;
 					this.updateGame();
@@ -416,6 +432,7 @@
 			this.level = 1 + Math.floor(this.totalLines/10);
 			this.speedLevel = this.gamespeed-Math.floor(this.totalLines/10)*20;
 			clearInterval(this.timer);
+			delete(this.timer);
 			this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
 
 			this.scoreContainer.innerHTML = this.score;
@@ -429,20 +446,13 @@
 	tetris.prototype.pauseGame = function(){
 		if(!this.paused) {
 			clearInterval(this.timer);
+			delete(this.timer);
 			this.paused = true;
 			}
 		else{
-			clearInterval(this.timer);
 			this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
 			this.paused = false;
 			}
-		};
-
-	// Clear timeout when dashboard window is closed
-	tetris.prototype.kill = function(){
-		var x = this.keyboardListener;
-		document.removeEventListener('keydown', x);
-		clearInterval(this.timer);
 		};
 
 	(function() {
@@ -494,6 +504,6 @@ btnRestart.addEventListener('click', function(){
 btnHome.addEventListener('click', function(){
 	clearInterval(tetris.timer);
 	delete(tetris.timer);
-	tetris.resetGamefield();
 	document.querySelector('.page.home').classList.remove('hidden');
+	document.querySelector('.game-over').classList.remove('visible');
 }, false);
