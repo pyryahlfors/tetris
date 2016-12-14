@@ -60,7 +60,7 @@ body, html {
 }
 
 .score-box {
-    color: #333;
+    color: rgba(255,255,255,.8);
     width: 90px;
     text-align: center;
     padding: 8px;
@@ -168,6 +168,19 @@ body, html {
 }
 
 
+.pause-screen {
+    position: absolute;
+    transform: translate3d(-50%, -50%, 0) scale(3);
+    color: #fff;
+    font-size: 2em;
+    top: 50%;
+    left: 50%;
+    background: #000;
+    padding: 2em;
+    transition: all 350ms;
+    transition-timing-function: ease-out;
+}
+
 /* Buttons, helpers etc. */
 
 .hidden {
@@ -187,7 +200,6 @@ body, html {
 }
 
 .btn-restart {
-    display: none;
     background: rgba(255, 255, 255, .1);
 }
 

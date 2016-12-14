@@ -7,24 +7,28 @@
 		this.blockArrayHeight = 3;		// Size of block container
 		this.line = 0;					// Top position of dropping piece
 		this.leftPos = 3;				// Left position of dropping piece
-		this.colors = [
-			[255,40,55,1],
-			[255,255,255,0.10],
-			[255,255,255,0.15],
-			[255,255,255,0.20],
-			[255,255,255,0.25],
-			[255,255,255,0.30],
-			[255,255,255,0.35]
-/*
-			[46,204,113],
-			[52,152,219],
-			[26,188,156],
-			[241,196,15],
-			[30,126,34],
-			[231,76,60],
-			[155,89,182]
-		*/
-];
+		this.colors = {
+			/* black and white. And red! */
+			'blackAndWhite' : [
+				[255,40,55,1],
+				[255,255,255,0.10],
+				[255,255,255,0.15],
+				[255,255,255,0.20],
+				[255,255,255,0.25],
+				[255,255,255,0.30],
+				[255,255,255,0.35]
+			],
+			'vauhtiVille' : [
+				[46,204,113],
+				[52,152,219],
+				[26,188,156],
+				[241,196,15],
+				[30,126,34],
+				[231,76,60],
+				[155,89,182]
+			]
+		};
+		this.theme = 'vauhtiVille';
 		this.score = 0;					// Score
 		this.totalLines	 = 0;			// Lines cleared
 		this.rotation = 0;				// Rotation of dropping piece
@@ -168,7 +172,7 @@
 
 	tetris.prototype.init = function() {
 		this.resetGamefield();
-
+		this.paused = false;
 		// Add event listener for keyboard
 		/*
 			Since we want to remove event listener after window is closed make it variable
@@ -240,8 +244,8 @@
 		};
 
 	tetris.prototype.keyInput = function(e){
-		e.preventDefault();
 		if(this.paused) {return;}
+		e.preventDefault();
 		var keydown = e.which;
 		// Left;
 		if (keydown === 37) {this.moveLeft();}
@@ -360,7 +364,7 @@
 					var xx = x*this.blockWidth;
 					this.canvasContainerCTX.beginPath();
 					this.canvasContainerCTX.moveTo(xx, yy);
-					this.canvasContainerCTX.fillStyle = "rgba("+this.colors[drawBlock-1]+")";
+					this.canvasContainerCTX.fillStyle = "rgba("+this.colors[this.theme][drawBlock-1]+")";
 					this.canvasContainerCTX.fillRect(xx, yy, this.blockWidth, this.blockHeight);
 					}
 				i++;
@@ -382,11 +386,15 @@
 
 	// Drop block
 		tetris.prototype.dropBlock = function() {
+			if(this.paused){
+				return;
+			}
 			window.requestAnimationFrame(function() {
 				if(this.line < 0 && this.dropRowPossible > 0) {
 					clearInterval(this.timer);
 					delete(tetris.timer);
 					document.querySelector('.game-over').classList.add('visible');
+					return;
 					}
 				else if(this.dropRowPossible >= 1 || this.combinedNext === undefined){
 					// Clear timer also when user clicks down
@@ -401,7 +409,6 @@
 				else {
 					this.line = this.line+(this.gameFieldWidth+1);
 					}
-
 				this.checkFullLines();
 				this.mergeBlock();
 				}.bind(this));
@@ -444,14 +451,12 @@
 		};
 
 	tetris.prototype.pauseGame = function(){
-		if(!this.paused) {
-			clearInterval(this.timer);
-			delete(this.timer);
-			this.paused = true;
+		this.paused = !this.paused;
+		if(this.paused) {
+			document.querySelector('.pause-screen').classList.remove('hidden');
 			}
 		else{
-			this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
-			this.paused = false;
+			document.querySelector('.pause-screen').classList.add('hidden');
 			}
 		};
 
@@ -482,28 +487,36 @@
 
 
 /* move this somewhere else later */
-var btnStart = document.querySelector('.btn-start');
-var btnHome = document.querySelector('.btn-home');
-var btnRestart = document.querySelector('.btn-restart');
-var btnPause = document.querySelector('.btn-pause');
+var btnStart = document.querySelectorAll('.btn-start');
+var btnHome = document.querySelectorAll('.btn-home');
+var btnRestart = document.querySelectorAll('.btn-restart');
+var btnPause = document.querySelectorAll('.btn-pause');
 
-btnStart.addEventListener('click', function(){
-	document.querySelector('.page.home').classList.add('hidden');
-	tetris.init();
-//	tetris.pauseGame();
-}, false);
+[].forEach.call(btnStart, function(btn){
+	btn.addEventListener('click', function(){
+		document.querySelector('.page.home').classList.add('hidden');
+		tetris.init();
+		}, false)
+	});
 
-btnPause.addEventListener('click', function(){
-	tetris.pauseGame();
-}, false);
+[].forEach.call(btnPause, function(btn){
+	btn.addEventListener('click', function(){
+		tetris.pauseGame();
+		}, false)
+	});
 
-btnRestart.addEventListener('click', function(){
-	tetris.resetGamefield();
-}, false);
+[].forEach.call(btnRestart, function(btn){
+	btn.addEventListener('click', function(){
+		tetris.resetGamefield();
+		}, false)
+	});
 
-btnHome.addEventListener('click', function(){
-	clearInterval(tetris.timer);
-	delete(tetris.timer);
-	document.querySelector('.page.home').classList.remove('hidden');
-	document.querySelector('.game-over').classList.remove('visible');
-}, false);
+[].forEach.call(btnHome, function(btn){
+	btn.addEventListener('click', function(){
+		clearInterval(tetris.timer);
+		delete(tetris.timer);
+		document.querySelector('.pause-screen').classList.add('hidden');
+		document.querySelector('.page.home').classList.remove('hidden');
+		document.querySelector('.game-over').classList.remove('visible');
+		}, false)
+	});

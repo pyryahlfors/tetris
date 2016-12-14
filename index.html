@@ -43,34 +43,38 @@
 		</div>
 
 		<div class="game-controls">
-			<a href="#" class="btn btn-pause" data-action="start">
+			<a href="#" class="btn btn-pause" data-action="pause">
 				<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 				    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
 				    <path d="M0 0h24v24H0z" fill="none"/>
 				</svg>
 			</a>
-
-			<a href="#" class="btn btn-restart" data-action="start">
-				<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
-				    <path d="M0 0h24v24H0z" fill="none"/>
-				</svg>
-			</a>
-
-			<!--a href="#" class="btn btn-home" data-action="start">
-				<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
-				    <path d="M0 0h24v24H0z" fill="none"/>
-				</svg>
-			</a-->
 		</div>
+	</div>
+
 	<div class="game-over">
 		Game over
+		<br />
 		<a href="#" class="btn btn-home" data-action="home">Home</a>
+	</div>
+
+	<div class="pause-screen hidden">
+		<a href="#" class="btn btn-restart" data-action="restart">
+			<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+				<path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
+				<path d="M0 0h24v24H0z" fill="none"/>
+			</svg>
+		</a>
+
+		<a href="#" class="btn btn-home" data-action="start">
+			<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+				<path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
+				<path d="M0 0h24v24H0z" fill="none"/>
+			</svg>
+		</a>
 	</div>
 </div>
 <!-- / Gamefield -->
-
 
 <script src="js/tetris.js"></script>
 
