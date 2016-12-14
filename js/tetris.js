@@ -7,6 +7,21 @@
 		this.blockArrayHeight = 3;		// Size of block container
 		this.line = 0;					// Top position of dropping piece
 		this.leftPos = 3;				// Left position of dropping piece
+		this.score = 0;					// Score
+		this.totalLines	 = 0;			// Lines cleared
+		this.dropRowPossible = 0;
+		this.rotation = 0;				// Rotation of dropping piece
+		this.gamespeed = 500;			// Game speed in milliseconds
+		this.speedLevel = 500;
+		this.defaults = {
+			speed: 500,
+			score: 0,
+			totalLines: 0,
+			line : 0
+		}
+		this.nextBlock = false;			// not implemented yet
+		this.paused = false;
+// Themes
 		this.colors = {
 			/* black and white. And red! */
 			'blackAndWhite' : [
@@ -19,43 +34,29 @@
 				[255,255,255,0.35]
 			],
 			'vauhtiVille' : [
-				[46,204,113],
-				[52,152,219],
-				[26,188,156],
-				[241,196,15],
-				[30,126,34],
-				[231,76,60],
-				[155,89,182]
+				[46,204,113,1],
+				[52,152,219,1],
+				[26,188,156,1],
+				[241,196,15,1],
+				[30,126,34,1],
+				[231,76,60,1],
+				[155,89,182,1]
 			]
 		};
-		this.theme = 'vauhtiVille';
-		this.score = 0;					// Score
-		this.totalLines	 = 0;			// Lines cleared
-		this.rotation = 0;				// Rotation of dropping piece
-		this.gamespeed = 500;			// Game speed in milliseconds
-		this.speedLevel = 500;
-		this.defaults = {
-			speed: 500,
-			score: 0,
-			totalLines: 0,
-			line : 0
-		}
-		this.nextBlock = false;			// not implemented yet
-		this.paused = false;
+		this.theme = 'blackAndWhite';
 
+// Test touch support
 		this.touchEvent = (function(){
 					var testTouch = document.createElement("DIV");
 					testTouch.setAttribute('ontouchstart', 'return;');
 					var isTouchDevice = (typeof testTouch.ontouchstart == 'function' && window.screenX === 0) ? true : false;
 					return (isTouchDevice) ? 'touchstart' : 'mousedown';
 					})();
+		if(this.touchEvent === 'touchstart'){document.body.addEventListener('touchmove', function(e){e.preventDefault();}, false);}
 
-		if(this.touchEvent === 'touchstart'){
-			document.body.addEventListener('touchmove', function(e){e.preventDefault();}, false);
-		}
-
+// Check resolution and add eventlistener for orientation change
+		var testY;
 		var thisGameContainer = document.querySelector('.page.tetris .gamefield-container').getBoundingClientRect();
-
 		var isMobile = (function() {
 			var check = false;
 			(function(a){
@@ -63,8 +64,6 @@
 			})(navigator.userAgent||navigator.vendor||window.opera);
 			return check;
 		})();
-
-		var testY;
 		// Make sure always use portrait ratio for game field
 		if(isMobile){
 			var maxHeight = (thisGameContainer.height > thisGameContainer.width) ? thisGameContainer.height : thisGameContainer.width;
@@ -118,8 +117,6 @@
 			[7,7,7,0,0,7,0,0,0,0,0,0,0,0,0,0],
 			[0,7,0,0,7,7,0,0,0,7,0,0,0,0,0,0]]];
 
-		this.widgetContainer = document.body;
-
 		// Create container
 		this.container = document.querySelector('.tetris');
 		this.scoreContainer = document.querySelector('.tetris-score-container SPAN');
@@ -133,15 +130,13 @@
 		this.touchCTRLDrop = document.querySelector('.tetris-touch-control-drop');
 		this.touchCTRLRotate = document.querySelector('.tetris-touch-control-rotate');
 
-
-
-		this.levelWidth = this.blockWidth*(this.gameFieldWidth+1);
-		this.levelHeight = this.blockHeight*(this.gameFieldHeight+1);
+// Set up canvas
+		this.levelWidth = this.blockWidth*(this.gameFieldWidth+1);		// level width in pixels
+		this.levelHeight = this.blockHeight*(this.gameFieldHeight+1);	// level height in pixels
 		this.canvasContainer = document.querySelector('CANVAS');
 		this.canvasContainerCTX = this.canvasContainer.getContext('2d');
 		this.canvasContainer.setAttribute("WIDTH", this.levelWidth);
 		this.canvasContainer.setAttribute("HEIGHT", this.levelHeight);
-		this.dropRowPossible = 0;
 		};
 
 	tetris.prototype.resetGamefield = function(){
@@ -171,6 +166,7 @@
 		};
 
 	tetris.prototype.init = function() {
+		document.body.className=this.theme;
 		this.resetGamefield();
 		this.paused = false;
 		// Add event listener for keyboard
