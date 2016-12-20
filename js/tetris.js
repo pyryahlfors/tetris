@@ -442,10 +442,10 @@
 	tetris.prototype.pauseGame = function(){
 		this.paused = !this.paused;
 		if(this.paused) {
-			document.querySelector('.pause-screen').classList.remove('hidden');
+			document.querySelector('.pause-screen').classList.add('visible');
 			}
 		else{
-			document.querySelector('.pause-screen').classList.add('hidden');
+			document.querySelector('.pause-screen').classList.remove('visible');
 			}
 		};
 
@@ -504,8 +504,8 @@ var btnPause = document.querySelectorAll('.btn-pause');
 	btn.addEventListener('click', function(){
 		clearInterval(tetris.timer);
 		delete(tetris.timer);
-		document.querySelector('.pause-screen').classList.add('hidden');
 		document.querySelector('.page.home').classList.remove('hidden');
 		document.querySelector('.game-over').classList.remove('visible');
+		document.querySelector('.pause-screen').classList.remove('visible');
 		}, false)
 	});

@@ -1,16 +1,5 @@
 @import 'touch.css';
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -webkit-highlight: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+@import 'te3s.css';
 
 body, html {
     width: 100vw;
@@ -28,7 +17,21 @@ body, html {
     user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background: #000;
+    color: #fff;
 }
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-highlight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 
 *, *:after, *:before {
     box-sizing: border-box;
@@ -146,7 +149,7 @@ body, html {
     transform: translateX(-50%);
 }
 
-.game-over {
+.game-over, .pause-screen {
     position: absolute;
     transform: translate3d(-50%, -50%, 0) scale(3);
     color: #fff;
@@ -161,25 +164,13 @@ body, html {
     z-index: -1;
 }
 
-.game-over.visible {
+.game-over.visible,
+.pause-screen.visible {
     z-index: 1;
     opacity: 1;
     transform: translate3d(-50%, -50%, 0) scale(1)
 }
 
-
-.pause-screen {
-    position: absolute;
-    transform: translate3d(-50%, -50%, 0) scale(3);
-    color: #fff;
-    font-size: 2em;
-    top: 50%;
-    left: 50%;
-    background: #000;
-    padding: 2em;
-    transition: all 350ms;
-    transition-timing-function: ease-out;
-}
 
 /* Buttons, helpers etc. */
 
@@ -204,18 +195,28 @@ body, html {
 }
 
 
-.btn-start {
+.btn-start,
+.pause-screen .btn,
+.game-over .btn {
     padding: 16px 32px;
     color: #fff;
     background-color: #0075DB;
     border-radius: 56px;
     font-size: 18px;
     box-shadow: 0 0 48px rgba(0, 0, 0, 0.2);
-    margin-top: 48px;
     transition: all .3s ease;
     font-weight: 500;
+    margin: 10px 0;
 }
 
-.btn-start:hover {
+.btn-start:hover,
+.pause-screen .btn,
+.game-over .btn {
     background-color: #007DEA;
+}
+
+.pause-screen .btn,
+.game-over .btn {
+    display : block;
+    width: 100%;
 }

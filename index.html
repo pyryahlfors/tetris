@@ -15,6 +15,7 @@
 <body>
 	<!-- Home / -->
 	<div class="page home">
+		<h1>TE3S</h1>
 		<a href="#" class="btn btn-start" data-action="start">Start</a>
 	</div>
 	<!-- / Home -->
@@ -43,12 +44,7 @@
 		</div>
 
 		<div class="game-controls">
-			<a href="#" class="btn btn-pause" data-action="pause">
-				<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-				    <path d="M0 0h24v24H0z" fill="none"/>
-				</svg>
-			</a>
+			<a href="#" class="btn btn-pause" data-action="pause"><span class="icon-ios-pause"></span></a>
 		</div>
 	</div>
 
@@ -58,19 +54,18 @@
 		<a href="#" class="btn btn-home" data-action="home">Home</a>
 	</div>
 
-	<div class="pause-screen hidden">
-		<a href="#" class="btn btn-restart" data-action="restart">
-			<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				<path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
-				<path d="M0 0h24v24H0z" fill="none"/>
-			</svg>
+	<div class="pause-screen">
+		<a href="#" class="btn btn-pause" data-action="pause">
+			<span class="icon-ios-play"></span>
+			Continue
 		</a>
-
-		<a href="#" class="btn btn-home" data-action="start">
-			<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				<path d="M5 13h14v-2H5v2zm-2 4h14v-2H3v2zM7 7v2h14V7H7z"/>
-				<path d="M0 0h24v24H0z" fill="none"/>
-			</svg>
+		<a href="#" class="btn" data-action="restart">
+			<span class="icon-ios-refresh-empty"></span>
+			Restart
+		</a>
+		<a href="#" class="btn btn-home" data-action="restart">
+			<span class="icon-ios-refresh-empty"></span>
+			Quit
 		</a>
 	</div>
 </div>
