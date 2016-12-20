@@ -156,8 +156,6 @@ body, html {
     font-size: 2em;
     top: 50%;
     left: 50%;
-    background: #000;
-    padding: 2em;
     opacity: 0;
     transition: all 350ms;
     transition-timing-function: ease-out;
@@ -182,12 +180,12 @@ body, html {
     line-height: 24px;
     color: rgba(255, 255, 255, .7);
     padding: 8px;
-    float: left;
     text-decoration: none;
     border-radius: 4px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    align-items: center;
 }
 
 .btn-restart {
@@ -217,6 +215,5 @@ body, html {
 
 .pause-screen .btn,
 .game-over .btn {
-    display : block;
     width: 100%;
 }
