@@ -157,7 +157,7 @@ body, html {
     top: 50%;
     left: 50%;
     transition: all 350ms;
-    transition-timing-function: ease-out;    
+    transition-timing-function: ease-out;
 }
 .game-over-container,
 .pause-screen-container{
@@ -199,6 +199,7 @@ body, html {
     display: -ms-flexbox;
     display: flex;
     align-items: center;
+    outline: none;
 }
 
 
@@ -225,4 +226,17 @@ body, html {
 .pause-screen .btn,
 .game-over .btn {
     width: 100%;
+}
+
+
+.highscore-container{
+  width: 100%;
+  padding: 0 20px
+}
+.score-line {
+  width :100%;
+  display: flex;
+}
+.score-line div {
+  width: 100%
 }

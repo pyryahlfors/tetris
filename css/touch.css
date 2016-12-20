@@ -11,7 +11,7 @@
     position: absolute;
     width: 50%;
     height: 50%;
-/*    box-shadow: 0 0 1px rgba(255, 255, 255, .3);*/
+    box-shadow: 0 0 1px rgba(255, 255, 255, .1);
 }
 
 .tetris-touch-point-container .tetris-touch-control-right {

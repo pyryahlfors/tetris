@@ -472,6 +472,44 @@
 	}());
 
 	window.tetris = new tetris();
+
+	var topScores = function(){
+		var topScoreData = [
+			[100, 10, 'Pyry'],
+			[90, 9, 'Pyry'],
+			[80, 8, 'Pyry'],
+			[70, 7, 'Pyry'],
+			[60, 6, 'Pyry'],
+			[50, 5, 'Pyry'],
+			[40, 4, 'Pyry'],
+			[30, 3, 'Pyry'],
+			[20, 2, 'Pyry'],
+			[10, 1, 'Pyry'],
+		];
+		localStorage.setItem('scores', JSON.stringify(topScoreData));
+		var scores = JSON.parse(localStorage.getItem('scores'));
+		console.log(scores);
+		var docFrag = document.createDocumentFragment();
+		for(var i=0, j=scores.length; i<j;i++){
+			var newLine = document.createElement("DIV");
+			newLine.className = "score-line";
+	
+			var name  = document.createElement("DIV");
+			var score = document.createElement("DIV");
+			var lines = document.createElement("DIV");
+
+			score.appendChild(document.createTextNode(scores[i][0]));
+			lines.appendChild(document.createTextNode(scores[i][1]));
+			name.appendChild(document.createTextNode(scores[i][2]));
+			newLine.appendChild(score);
+			newLine.appendChild(lines);
+			newLine.appendChild(name);
+			docFrag.appendChild(newLine)
+		}
+		document.querySelector('.highscore-container').appendChild(docFrag);
+	};
+
+	topScores();
 })();
 
 
@@ -497,6 +535,7 @@ var btnPause = document.querySelectorAll('.btn-pause');
 [].forEach.call(btnRestart, function(btn){
 	btn.addEventListener('click', function(){
 		tetris.resetGamefield();
+		tetris.pauseGame();
 		}, false)
 	});
 
