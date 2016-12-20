@@ -156,16 +156,29 @@ body, html {
     font-size: 2em;
     top: 50%;
     left: 50%;
-    opacity: 0;
     transition: all 350ms;
-    transition-timing-function: ease-out;
+    transition-timing-function: ease-out;    
+}
+.game-over-container,
+.pause-screen-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.4);
     z-index: -1;
+    opacity: 0;
 }
 
-.game-over.visible,
-.pause-screen.visible {
+.game-over-container.visible,
+.pause-screen-container.visible {
     z-index: 1;
     opacity: 1;
+}
+
+.game-over-container.visible .game-over,
+.pause-screen-container.visible .pause-screen {
     transform: translate3d(-50%, -50%, 0) scale(1)
 }
 
@@ -186,10 +199,6 @@ body, html {
     display: -ms-flexbox;
     display: flex;
     align-items: center;
-}
-
-.btn-restart {
-    background: rgba(255, 255, 255, .1);
 }
 
 

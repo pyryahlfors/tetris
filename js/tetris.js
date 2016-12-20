@@ -382,7 +382,7 @@
 				if(this.line < 0 && this.dropRowPossible > 0) {
 					clearInterval(this.timer);
 					delete(tetris.timer);
-					document.querySelector('.game-over').classList.add('visible');
+					document.querySelector('.game-over-container').classList.add('visible');
 					return;
 					}
 				else if(this.dropRowPossible >= 1 || this.combinedNext === undefined){
@@ -442,10 +442,10 @@
 	tetris.prototype.pauseGame = function(){
 		this.paused = !this.paused;
 		if(this.paused) {
-			document.querySelector('.pause-screen').classList.add('visible');
+			document.querySelector('.pause-screen-container').classList.add('visible');
 			}
 		else{
-			document.querySelector('.pause-screen').classList.remove('visible');
+			document.querySelector('.pause-screen-container').classList.remove('visible');
 			}
 		};
 
@@ -505,7 +505,7 @@ var btnPause = document.querySelectorAll('.btn-pause');
 		clearInterval(tetris.timer);
 		delete(tetris.timer);
 		document.querySelector('.page.home').classList.remove('hidden');
-		document.querySelector('.game-over').classList.remove('visible');
-		document.querySelector('.pause-screen').classList.remove('visible');
+		document.querySelector('.game-over-container').classList.remove('visible');
+		document.querySelector('.pause-screen-container').classList.remove('visible');
 		}, false)
 	});
