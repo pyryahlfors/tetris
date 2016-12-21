@@ -13,6 +13,7 @@
 		this.rotation = 0;				// Rotation of dropping piece
 		this.gamespeed = 500;			// Game speed in milliseconds
 		this.speedLevel = 500;
+		this.gameOver = false;
 		this.defaults = {
 			speed: 500,
 			score: 0,
@@ -145,7 +146,7 @@
 		this.combinedField	= [];	// Combined [blockfield + gamefield] (for 'collision detect')
 		this.blockfield	= [];		// Contains single block (current falling block)
 		this.gameField	= [];		// Contains all dropped blocks
-
+		this.gameOver = false;
 		this.gamespeed = this.defaults.speed;
 		this.score = 0;
 		this.totalLines = 0;
@@ -193,7 +194,7 @@
 				this.rotate();
 			}.bind(self), false);
 			this.touchCTRLDrop.addEventListener(this.touchEvent, function(){
-				if(this.paused) {return;}
+				if(this.paused || this.gameOver) {return;}
 				this.dropBlock();
 			}.bind(self), false);
 
@@ -240,7 +241,7 @@
 		};
 
 	tetris.prototype.keyInput = function(e){
-		if(this.paused) {return;}
+		if(this.paused || this.gameOver) {return;}
 		e.preventDefault();
 		var keydown = e.which;
 		if (keydown === 37) {this.moveLeft();}	// Left;
@@ -382,6 +383,12 @@
 				if(this.line < 0 && this.dropRowPossible > 0) {
 					clearInterval(this.timer);
 					delete(tetris.timer);
+					this.gameOver = true;
+					// Update highscore data ->
+					var topScoreData = [];
+					this.setTopScores({'scores' : [this.score, this.totalLines]});
+					// <- Update highscore data
+
 					document.querySelector('.game-over-container').classList.add('visible');
 					return;
 					}
@@ -449,6 +456,42 @@
 			}
 		};
 
+	tetris.prototype.getTopScores = function(){
+		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0]);
+		var docFrag = document.createDocumentFragment();
+		for(var i=0, j=scores.length; i<j;i++){
+			var newLine = document.createElement("DIV");
+			newLine.className = "score-line";
+
+			var res = document.createElement("DIV");
+			var score = document.createElement("DIV");
+			var lines = document.createElement("DIV");
+
+			res.appendChild(document.createTextNode((i+1)+'.'));
+			score.appendChild(document.createTextNode(scores[i][0]));
+			lines.appendChild(document.createTextNode(scores[i][1]));
+
+			newLine.appendChild(res);
+			newLine.appendChild(score);
+			newLine.appendChild(lines);
+
+			docFrag.appendChild(newLine)
+		}
+		var container = document.querySelector('.highscore-container');
+		while(container.querySelectorAll('.score-line').length > 1){container.removeChild(container.lastChild);}
+		container.appendChild(docFrag);
+	};
+
+	tetris.prototype.setTopScores = function(scoreData){
+		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0]);
+		scores.push(scoreData.scores);
+		scores = scores.sort(function(a,b) {return a[0] < b[0];});
+		scores = scores.slice(0,10);
+		console.log(scores)
+
+		localStorage.setItem('scores', JSON.stringify(scores));
+	};
+
 	(function() {
 		var lastTime = 0;
 		var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -472,48 +515,9 @@
 	}());
 
 	window.tetris = new tetris();
-
-	var topScores = function(){
-		var topScoreData = [
-			[100, 10, 'Pyry'],
-			[90, 9, 'Pyry'],
-			[80, 8, 'Pyry'],
-			[70, 7, 'Pyry'],
-			[60, 6, 'Pyry'],
-			[50, 5, 'Pyry'],
-			[40, 4, 'Pyry'],
-			[30, 3, 'Pyry'],
-			[20, 2, 'Pyry'],
-			[10, 1, 'Pyry'],
-		];
-		localStorage.setItem('scores', JSON.stringify(topScoreData));
-		var scores = JSON.parse(localStorage.getItem('scores'));
-		console.log(scores);
-		var docFrag = document.createDocumentFragment();
-		for(var i=0, j=scores.length; i<j;i++){
-			var newLine = document.createElement("DIV");
-			newLine.className = "score-line";
-
-			var name  = document.createElement("DIV");
-			var score = document.createElement("DIV");
-			var lines = document.createElement("DIV");
-
-			name.appendChild(document.createTextNode(scores[i][2]));
-			score.appendChild(document.createTextNode(scores[i][0]));
-			lines.appendChild(document.createTextNode(scores[i][1]));
-
-			newLine.appendChild(name);
-			newLine.appendChild(score);
-			newLine.appendChild(lines);
-
-			docFrag.appendChild(newLine)
-		}
-		document.querySelector('.highscore-container').appendChild(docFrag);
-	};
-
-	topScores();
 })();
 
+tetris.getTopScores();
 
 /* move this somewhere else later */
 var btnStart = document.querySelectorAll('.btn-start');
@@ -525,6 +529,7 @@ var btnPause = document.querySelectorAll('.btn-pause');
 	btn.addEventListener('click', function(){
 		document.querySelector('.page.home').classList.add('hidden');
 		tetris.init();
+
 		}, false)
 	});
 
@@ -545,6 +550,7 @@ var btnPause = document.querySelectorAll('.btn-pause');
 	btn.addEventListener('click', function(){
 		clearInterval(tetris.timer);
 		delete(tetris.timer);
+		tetris.getTopScores();
 		document.querySelector('.page.home').classList.remove('hidden');
 		document.querySelector('.game-over-container').classList.remove('visible');
 		document.querySelector('.pause-screen-container').classList.remove('visible');
