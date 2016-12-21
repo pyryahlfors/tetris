@@ -493,17 +493,19 @@
 		for(var i=0, j=scores.length; i<j;i++){
 			var newLine = document.createElement("DIV");
 			newLine.className = "score-line";
-	
+
 			var name  = document.createElement("DIV");
 			var score = document.createElement("DIV");
 			var lines = document.createElement("DIV");
 
+			name.appendChild(document.createTextNode(scores[i][2]));
 			score.appendChild(document.createTextNode(scores[i][0]));
 			lines.appendChild(document.createTextNode(scores[i][1]));
-			name.appendChild(document.createTextNode(scores[i][2]));
+
+			newLine.appendChild(name);
 			newLine.appendChild(score);
 			newLine.appendChild(lines);
-			newLine.appendChild(name);
+
 			docFrag.appendChild(newLine)
 		}
 		document.querySelector('.highscore-container').appendChild(docFrag);
