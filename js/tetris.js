@@ -48,12 +48,14 @@
 
 // Test touch support
 		this.touchEvent = (function(){
-					var testTouch = document.createElement("DIV");
-					testTouch.setAttribute('ontouchstart', 'return;');
-					var isTouchDevice = (typeof testTouch.ontouchstart == 'function' && window.screenX === 0) ? true : false;
-					return (isTouchDevice) ? 'touchstart' : 'mousedown';
-					})();
-		if(this.touchEvent === 'touchstart'){document.body.addEventListener('touchmove', function(e){e.preventDefault();}, false);}
+			var testTouch = document.createElement("DIV");
+			testTouch.setAttribute('ontouchstart', 'return;');
+			var isTouchDevice = (typeof testTouch.ontouchstart == 'function' && window.screenX === 0) ? true : false;
+			return (isTouchDevice) ? 'touchstart' : 'mousedown';
+			})();
+		if(this.touchEvent === 'touchstart'){
+			document.body.addEventListener('touchstart', function(e){e.preventDefault();}, false);
+		}
 
 // Check resolution and add eventlistener for orientation change
 		var testY;
@@ -485,10 +487,9 @@
 	tetris.prototype.setTopScores = function(scoreData){
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0]);
 		scores.push(scoreData.scores);
-		scores = scores.sort(function(a,b) {return a[0] < b[0];});
+		scores = scores.sort(function(a,b) {return b[0] - a[0];});
 		scores = scores.slice(0,10);
-		console.log(scores)
-
+		console.log('after slicing', scores.toString());
 		localStorage.setItem('scores', JSON.stringify(scores));
 	};
 
@@ -526,7 +527,7 @@ var btnRestart = document.querySelectorAll('.btn-restart');
 var btnPause = document.querySelectorAll('.btn-pause');
 
 [].forEach.call(btnStart, function(btn){
-	btn.addEventListener('click', function(){
+	btn.addEventListener(tetris.touchEvent, function(){
 		document.querySelector('.page.home').classList.add('hidden');
 		tetris.init();
 
@@ -534,20 +535,20 @@ var btnPause = document.querySelectorAll('.btn-pause');
 	});
 
 [].forEach.call(btnPause, function(btn){
-	btn.addEventListener('click', function(){
+	btn.addEventListener(tetris.touchEvent, function(){
 		tetris.pauseGame();
 		}, false)
 	});
 
 [].forEach.call(btnRestart, function(btn){
-	btn.addEventListener('click', function(){
+	btn.addEventListener(tetris.touchEvent, function(){
 		tetris.resetGamefield();
 		tetris.pauseGame();
 		}, false)
 	});
 
 [].forEach.call(btnHome, function(btn){
-	btn.addEventListener('click', function(){
+	btn.addEventListener(tetris.touchEvent, function(){
 		clearInterval(tetris.timer);
 		delete(tetris.timer);
 		tetris.getTopScores();
