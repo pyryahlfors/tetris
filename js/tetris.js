@@ -44,7 +44,7 @@
 				[155,89,182,1]
 			]
 		};
-		this.theme = 'blackAndWhite';
+		this.theme = 'vauhtiVille';
 
 // Test touch support
 		this.touchEvent = (function(){
@@ -386,12 +386,12 @@
 					clearInterval(this.timer);
 					delete(tetris.timer);
 					this.gameOver = true;
+					document.querySelector('.game-over-container').classList.add('visible');
 					// Update highscore data ->
 					var topScoreData = [];
-					this.setTopScores({'scores' : [this.score, this.totalLines]});
+					this.setTopScores({'scores' : [this.score, this.totalLines, '---', new Date().getTime()]});
 					// <- Update highscore data
 
-					document.querySelector('.game-over-container').classList.add('visible');
 					return;
 					}
 				else if(this.dropRowPossible >= 1 || this.combinedNext === undefined){
@@ -459,7 +459,8 @@
 		};
 
 	tetris.prototype.getTopScores = function(){
-		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0]);
+
+		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		var docFrag = document.createDocumentFragment();
 		for(var i=0, j=scores.length; i<j;i++){
 			var newLine = document.createElement("DIV");
@@ -468,12 +469,15 @@
 			var res = document.createElement("DIV");
 			var score = document.createElement("DIV");
 			var lines = document.createElement("DIV");
+			var name = document.createElement("DIV");
 
 			res.appendChild(document.createTextNode((i+1)+'.'));
+			name.appendChild(document.createTextNode(scores[i][2]));
 			score.appendChild(document.createTextNode(scores[i][0]));
 			lines.appendChild(document.createTextNode(scores[i][1]));
 
 			newLine.appendChild(res);
+			newLine.appendChild(name);
 			newLine.appendChild(score);
 			newLine.appendChild(lines);
 
@@ -485,11 +489,20 @@
 	};
 
 	tetris.prototype.setTopScores = function(scoreData){
-		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0]);
+		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		scores.push(scoreData.scores);
 		scores = scores.sort(function(a,b) {return b[0] - a[0];});
 		scores = scores.slice(0,10);
 		console.log('after slicing', scores.toString());
+
+		// Check if you made into top 10
+		var rank = 9999;
+		for(var i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
+
+		if(rank < 9999){
+			scores[rank][2] = 'ABC';
+
+		}
 		localStorage.setItem('scores', JSON.stringify(scores));
 	};
 

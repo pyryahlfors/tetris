@@ -201,6 +201,11 @@ body, html {
     display: flex;
     align-items: center;
     outline: none;
+    text-align: center;
+}
+
+.btn.btn-with-icon{
+  text-align: left;
 }
 
 
@@ -227,6 +232,7 @@ body, html {
 .pause-screen .btn,
 .game-over .btn {
     width: 100%;
+    justify-content: center
 }
 
 
@@ -234,10 +240,15 @@ body, html {
   width: 100%;
   padding: 0 20px
 }
+.highscore-container .title-row {
+  font-weight: bold;
+}
 .score-line {
   width :100%;
   display: flex;
+  justify-content: space-around;
 }
+
 .score-line div {
-  width: 100%
+  width: 20%;
 }
