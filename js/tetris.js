@@ -510,20 +510,23 @@
 			scores[rank][2] = inputField.value.toUpperCase();
 			// move this somewhere else
 
-			document.addEventListener('virtualKeyboardKeyUp', function(evt){
-				if(inputField.value.length < 3){
-					inputField.value+=evt.detail.character;
-				}
-				else{
-					inputField.value=evt.detail.character;
-				}
-				scores[rank][2] = inputField.value.toUpperCase();
-				localStorage.setItem('scores', JSON.stringify(scores));
-			}, false);
-			inputField.addEventListener('keyup', function(){
-				scores[rank][2] = this.value.toUpperCase();
-				localStorage.setItem('scores', JSON.stringify(scores));
-			}, false);
+			if(!this.hasVirtualKeyboardBound){
+				document.addEventListener('virtualKeyboardKeyUp', function(evt){
+					if(inputField.value.length < 3){
+						inputField.value+=evt.detail.character;
+					}
+					else{
+						inputField.value=evt.detail.character;
+					}
+					scores[rank][2] = inputField.value.toUpperCase();
+					localStorage.setItem('scores', JSON.stringify(scores));
+				}, false);
+				inputField.addEventListener('keyup', function(){
+					scores[rank][2] = this.value.toUpperCase();
+					localStorage.setItem('scores', JSON.stringify(scores));
+				}, false);
+			this.hasVirtualKeyboardBound = true;
+			}
 			document.querySelector('.game-over').classList.add('highscores-visible');
 		}
 		localStorage.setItem('scores', JSON.stringify(scores));
