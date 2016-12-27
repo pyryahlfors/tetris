@@ -272,4 +272,34 @@ body, html {
     color: #fff;
     border-bottom: 4px solid #eee;
     text-align: center;
+    z-index: 999
+    -webkit-user-select:auto;
+}
+
+.virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom :10px;
+    max-width: 100%;
+    background: rgba(0,0,0,.8);
+    z-index: 9999
+}
+
+.virtual-keyboard.hidden {
+    display: none!important;
+}
+
+.virtual-keyboard DIV {
+    background: #007DEA;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    width: 20px;
+    margin: 5px;
+    text-transform: uppercase;
+}
+
+.virtual-keyboard DIV:hover {
+    background: #004DcA;
 }

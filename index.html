@@ -13,81 +13,82 @@
 </head>
 
 <body>
-	<!-- Home / -->
-	<div class="page home">
-		<h1>TE3S</h1>
-		<a href="#" class="btn btn-start" data-action="start">Start</a>
-		<div class="highscore-container">
-			<div class="score-line title-row">
-				<div>Rank</div>
-				<div>Name</div>
-				<div>Score</div>
-				<div>Lines</div>
-			</div>
-		</div>
-	</div>
-	<!-- / Home -->
-
-	<!-- Gamefield / -->
-	<div class="page tetris">
-		<div class="gamefield-container">
-			<canvas></canvas>
-			<div class="scores">
-				<div class="score-box score-box-side tetris-lines-container">
-					<h2>Lines</h2><span>-</span>
-				</div>
-				<div class="score-box tetris-score-container">
-					<h2>Score</h2><span>-</span>
-				</div>
-				<div class="score-box score-box-side tetris-level-container">
-					<h2>Level<h2><span>-</span>
-				</div>
-			</div>
-		    <div class="tetris-touch-point-container">
-		        <div class="tetris-touch-control-right"></div>
-		        <div class="tetris-touch-control-left"></div>
-		        <div class="tetris-touch-control-drop"></div>
-		        <div class="tetris-touch-control-rotate"></div>
-		    </div>
-		</div>
-
-		<div class="game-controls">
-			<a href="#" class="btn btn-pause" data-action="pause"><span class="icon-ios-pause"></span></a>
-		</div>
-	</div>
-
-	<div class="game-over-container">
-		<div class="game-over">
-			<h1>Game over</h1>
-
-			<div class="highscores">
-				Enter your initials
-				<br />
-				<input name="initials" class="initials" maxlength="3" />
-			</div>
-
-
-			<a href="#" class="btn btn-home" data-action="home">Home</a>
-		</div>
-	</div>
-
-	<div class="pause-screen-container">
-		<div class="pause-screen">
-			<a href="#" class="btn btn-pause btn-with-icon" data-action="pause">
-				<span class="icon-ios-play"></span>
-				Continue
-			</a>
-			<a href="#" class="btn btn-restart btn-with-icon" data-action="restart">
-				<span class="icon-ios-refresh-empty"></span>
-				Restart
-			</a>
-			<a href="#" class="btn btn-home btn-with-icon" data-action="restart">
-				<span class="icon-ios-refresh-empty"></span>
-				Quit
-			</a>
+<!-- Home / -->
+<div class="page home">
+	<h1>TE3S</h1>
+	<a href="#" class="btn btn-start" data-action="start">Start</a>
+	<div class="highscore-container">
+		<div class="score-line title-row">
+			<div>Rank</div>
+			<div>Name</div>
+			<div>Score</div>
+			<div>Lines</div>
 		</div>
 	</div>
 </div>
+<!-- / Home -->
+
+<!-- Gamefield / -->
+<div class="page tetris">
+	<div class="gamefield-container">
+		<canvas></canvas>
+		<div class="scores">
+			<div class="score-box score-box-side tetris-lines-container">
+				<h2>Lines</h2><span>-</span>
+			</div>
+			<div class="score-box tetris-score-container">
+				<h2>Score</h2><span>-</span>
+			</div>
+			<div class="score-box score-box-side tetris-level-container">
+				<h2>Level<h2><span>-</span>
+			</div>
+		</div>
+	    <div class="tetris-touch-point-container">
+	        <div class="tetris-touch-control-right"></div>
+	        <div class="tetris-touch-control-left"></div>
+	        <div class="tetris-touch-control-drop"></div>
+	        <div class="tetris-touch-control-rotate"></div>
+	    </div>
+	</div>
+
+	<div class="game-controls">
+		<a href="#" class="btn btn-pause" data-action="pause"><span class="icon-ios-pause"></span></a>
+	</div>
+</div>
+
+<div class="game-over-container">
+	<div class="game-over">
+		<h1>Game over</h1>
+
+		<div class="highscores">
+			Enter your initials
+			<br />
+			<input name="initials" class="initials" maxlength="3" />
+		</div>
+
+
+		<a href="#" class="btn btn-home" data-action="home">Home</a>
+	</div>
+</div>
+
+<div class="pause-screen-container">
+	<div class="pause-screen">
+		<a href="#" class="btn btn-pause btn-with-icon" data-action="pause">
+			<span class="icon-ios-play"></span>
+			Continue
+		</a>
+		<a href="#" class="btn btn-restart btn-with-icon" data-action="restart">
+			<span class="icon-ios-refresh-empty"></span>
+			Restart
+		</a>
+		<a href="#" class="btn btn-home btn-with-icon" data-action="restart">
+			<span class="icon-ios-refresh-empty"></span>
+			Quit
+		</a>
+	</div>
+</div>
+
+<div class="virtual-keyboard hidden"></div>
 <!-- / Gamefield -->
 
 <script src="js/tetris.js"></script>

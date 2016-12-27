@@ -499,17 +499,29 @@
 		scores.push(scoreData.scores);
 		scores = scores.sort(function(a,b) {return b[0] - a[0];});
 		scores = scores.slice(0,10);
-		console.log('after slicing', scores.toString());
 
 		// Check if you made into top 10
 		var rank = 9999;
 		for(var i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
-
+		// You did! good for you mate
 		if(rank < 9999){
 			var inputField = document.querySelector('INPUT.initials');
-			scores[rank][2] = inputField.value;
+			document.querySelector('.virtual-keyboard').classList.remove('hidden');
+			scores[rank][2] = inputField.value.toUpperCase();
+			// move this somewhere else
+
+			document.addEventListener('virtualKeyboardKeyUp', function(evt){
+				if(inputField.value.length < 3){
+					inputField.value+=evt.detail.character;
+				}
+				else{
+					inputField.value=evt.detail.character;
+				}
+				scores[rank][2] = inputField.value.toUpperCase();
+				localStorage.setItem('scores', JSON.stringify(scores));
+			}, false);
 			inputField.addEventListener('keyup', function(){
-				scores[rank][2] = this.value;
+				scores[rank][2] = this.value.toUpperCase();
 				localStorage.setItem('scores', JSON.stringify(scores));
 			}, false);
 			document.querySelector('.game-over').classList.add('highscores-visible');
@@ -554,7 +566,6 @@ var btnPause = document.querySelectorAll('.btn-pause');
 	btn.addEventListener(tetris.touchEvent, function(){
 		document.querySelector('.page.home').classList.add('hidden');
 		tetris.init();
-
 		}, false)
 	});
 
@@ -581,3 +592,20 @@ var btnPause = document.querySelectorAll('.btn-pause');
 		document.querySelector('.pause-screen-container').classList.remove('visible');
 		}, false)
 	});
+
+// Creata virtual keyboard
+var keyboardContainer = document.querySelector('.virtual-keyboard');
+var keys = '0123456789 abcdefghijklmnopqrstuvwxyz-#!';
+
+var docFrag = document.createDocumentFragment();
+for(var i=0, j=keys.length; i<j;i++){
+	var virtualKey = document.createElement("div");
+	virtualKey.appendChild(document.createTextNode(keys[i]));
+	virtualKey.setAttribute('data-character', keys[i]);
+	virtualKey.addEventListener(tetris.touchEvent, function(){
+		var vent = new CustomEvent("virtualKeyboardKeyUp", {detail: {character: this.getAttribute('data-character').toUpperCase()}});
+		document.dispatchEvent(vent);
+	}, false)
+	docFrag.appendChild(virtualKey);
+}
+keyboardContainer.appendChild(docFrag);
