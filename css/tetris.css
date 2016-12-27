@@ -159,6 +159,7 @@ body, html {
     left: 50%;
     transition: all 350ms;
     transition-timing-function: ease-out;
+    text-align: center;
 }
 .game-over-container,
 .pause-screen-container{
@@ -251,4 +252,24 @@ body, html {
 
 .score-line div {
   width: 20%;
+}
+
+
+/* Highscores initials input */
+.highscores {
+    display: none;
+    width: 100%;
+}
+
+.game-over.highscores-visible .highscores{display: block;}
+
+.highscores .initials {
+    display: block;
+    width: 100%;
+    font-size: 2em;
+    background: #000;
+    border: 0;
+    color: #fff;
+    border-bottom: 4px solid #eee;
+    text-align: center;
 }

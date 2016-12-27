@@ -154,7 +154,8 @@
 		this.totalLines = 0;
 		this.leftPos = 3;
 		this.dropRowPossible = 0;
-		this.line = -2*(this.gameFieldWidth+1); // Start from below the gamefield
+		this.line = -2*(this.gameFieldWidth+1);
+		this.level = 0; // Start from below the gamefield
 
 		for(var y=0;y<=this.gameFieldHeight;y++) {
 			for(var x=0; x<=this.gameFieldWidth;x++) {
@@ -164,6 +165,11 @@
 				i++;
 				}
 			}
+
+		this.scoreContainer.innerHTML = this.score;
+		this.linesContainer.innerHTML = this.totalLines;
+		this.levelContainer.innerHTML = this.level;
+
 		this.drawGameField();
 		this.clearTempArray();
 		};
@@ -459,7 +465,6 @@
 		};
 
 	tetris.prototype.getTopScores = function(){
-
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		var docFrag = document.createDocumentFragment();
 		for(var i=0, j=scores.length; i<j;i++){
@@ -489,6 +494,7 @@
 	};
 
 	tetris.prototype.setTopScores = function(scoreData){
+		document.querySelector('.game-over').classList.remove('highscores-visible');
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		scores.push(scoreData.scores);
 		scores = scores.sort(function(a,b) {return b[0] - a[0];});
@@ -500,8 +506,13 @@
 		for(var i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
 
 		if(rank < 9999){
-			scores[rank][2] = 'ABC';
-
+			var inputField = document.querySelector('INPUT.initials');
+			scores[rank][2] = inputField.value;
+			inputField.addEventListener('keyup', function(){
+				scores[rank][2] = this.value;
+				localStorage.setItem('scores', JSON.stringify(scores));
+			}, false);
+			document.querySelector('.game-over').classList.add('highscores-visible');
 		}
 		localStorage.setItem('scores', JSON.stringify(scores));
 	};
