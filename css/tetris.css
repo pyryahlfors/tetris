@@ -111,9 +111,10 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
 
 .tetris canvas {
     position: absolute;
-    border-bottom: 8px solid #333;
+    border-bottom: 8px solid rgba(0, 64, 128, 0.1);
     left: 50%;
     transform: translateX(-50%);
+    box-shadow: 0 0 48px rgba(0, 64, 128, 0.1);
 }
 
 .game-over, .pause-screen {
