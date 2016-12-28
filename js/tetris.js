@@ -599,19 +599,25 @@
 	// Create virtual keyboard
 	var keyboardContainer = document.querySelector('.virtual-keyboard');
 	// These characters are cool. Other characters suck :(
-	var keys = '0123456789 abcdefghijklmnopqrstuvwxyz-#!';
+	var keys = '0123456789 abcdefghijklmnopqrstuvwxyz-#!.?';
 
 	var docFrag = document.createDocumentFragment();
 	for(var i=0, j=keys.length; i<j;i++){
+		var virtualKeyContainer = document.createElement("div");
+		virtualKeyContainer.className = "key-container";
+		virtualKeyContainer.setAttribute('data-character', keys[i]);
+
 		var virtualKey = document.createElement("div");
 		virtualKey.appendChild(document.createTextNode(keys[i]));
-		virtualKey.setAttribute('data-character', keys[i]);
-		virtualKey.addEventListener(tetris.touchEvent, function(){
+
+		virtualKeyContainer.appendChild(virtualKey);
+		virtualKeyContainer.addEventListener(tetris.touchEvent, function(){
 			// Emit event containing pressed character
 			var vent = new CustomEvent("virtualKeyboardKeyUp", {detail: {character: this.getAttribute('data-character').toUpperCase()}});
 			document.dispatchEvent(vent);
-		}, false)
-		docFrag.appendChild(virtualKey);
+		}, false);
+
+		docFrag.appendChild(virtualKeyContainer);
 	}
 	keyboardContainer.appendChild(docFrag);
 

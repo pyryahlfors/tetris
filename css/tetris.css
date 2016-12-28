@@ -291,7 +291,7 @@ input.initials {
     margin: 20px 0;
 }
 
-.virtual-keyboard DIV {
+.virtual-keyboard .key-container {
     background: rgba(128,128,128,1);
     color: #fff;
     padding: 5px;
@@ -300,8 +300,8 @@ input.initials {
     text-transform: uppercase;
 }
 
-.virtual-keyboard DIV:hover,
-.virtual-keyboard DIV:focus {
+.virtual-keyboard .key-container:hover,
+.virtual-keyboard .key-container:focus {
     background: rgba(164,164,164,1);
 }
 
