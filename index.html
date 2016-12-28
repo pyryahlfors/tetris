@@ -15,16 +15,22 @@
 <body>
 <!-- Home / -->
 <div class="page home">
-	<h1>TE3S</h1>
-	<a href="#" class="btn btn-start">Start</a>
-	<div class="highscore-container">
+
+	<header>
+		<h1>TE3S</h1>
+	</header>
+
+	<section class="highscore-container">
 		<div class="score-line title-row">
-			<div>Rank</div>
+			<div>#</div>
 			<div>Name</div>
 			<div>Score</div>
 			<div>Lines</div>
 		</div>
-	</div>
+	</section>
+
+	<a href="#" class="btn btn-start" data-action="start">Start</a>
+
 </div>
 <!-- / Home -->
 
@@ -40,7 +46,7 @@
 				<h2>Score</h2><span>-</span>
 			</div>
 			<div class="score-box score-box-side tetris-level-container">
-				<h2>Level<h2><span>-</span>
+				<h2>Level</h2><span>-</span>
 			</div>
 		</div>
 	    <div class="tetris-touch-point-container">
@@ -58,20 +64,20 @@
 <!-- / Gamefield -->
 
 <!-- Game over / -->
-<div class="game-over-container">
-	<div class="game-over">
+<div class="game-over-container visible">
+	<div class="game-over highscores-visible">
 		<h1>Game over</h1>
 
 		<div class="highscores">
 			<h2>Enter your initials</h2>
-			<input name="initials" class="initials" value="..." maxlength="3" size="3" />
-			<div style="display: flex; align-items: center">
+			<input name="initials" class="initials" value="Ville" />
+
 				<div class="initials-container">
 					<span contenteditable="true" class="virtual-keyboard-input highscore-initials"></span>
 					<div class="caret"></div>
 				</div>
-				<div class="initials-submit">↲</div>
-			</div>
+				<div class="initials-submit btn">YEAH</div>
+
 			<!-- "virtual keyboard" for highscore initials input -->
 			<div class="virtual-keyboard"></div>
 		</div>
