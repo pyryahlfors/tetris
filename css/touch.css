@@ -33,3 +33,12 @@
     top: 0%;
     left: 0%;
 }
+
+.pressed {
+  animation: blinkfast .1s linear;
+}
+
+@keyframes blinkfast {
+    0%   { background: rgba(0,64,128,.05) }
+    100% { background: rgba(0,64,128,0) }
+}
