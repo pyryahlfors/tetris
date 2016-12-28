@@ -154,7 +154,6 @@ body, html {
     position: absolute;
     transform: translate3d(-50%, -50%, 0) scale(3);
     color: #fff;
-    font-size: 2em;
     top: 50%;
     left: 50%;
     width: 100%;
@@ -170,7 +169,7 @@ body, html {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.8);
     z-index: -1;
     opacity: 0;
 }
@@ -188,10 +187,6 @@ body, html {
 
 
 /* Buttons, helpers etc. */
-
-.hidden {
-    display: none;
-}
 
 .btn {
     line-height: 24px;
@@ -265,39 +260,87 @@ body, html {
 
 .game-over.highscores-visible .highscores{display: block;}
 
-.highscores .initials {
-    display: block;
+.initials-container {
+    display: flex;
     width: 100%;
-    font-size: 2em;
-    background: #000;
+    background: #111;
     border: 0;
     color: #fff;
-    border-bottom: 4px solid #eee;
-    text-align: center;
-    z-index: 999
-    -webkit-user-select:auto;
+    border-bottom: 4px solid #333;
+    z-index: 999;
+    margin : 20px 0;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.initials-submit {
+    background: #333;
+    border: 0;
+    color: #fff;
+    border-bottom: 4px solid #0075DB;
+    z-index: 999;
+    margin : 20px 0;
+    font-size: 2em;
+    line-height: 2em;
+    padding: 0 2em;
+}
+
+input.initials {
+    display: none;
 }
 
 .virtual-keyboard {
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
-    background: rgba(0,0,0,.8);
     z-index: 9999;
     margin: 20px 0;
 }
 
 .virtual-keyboard DIV {
-    background: #007DEA;
+    background: rgba(128,128,128,1);
     color: #fff;
     padding: 5px;
     text-align: center;
     width: 20px;
     margin: 5px;
     text-transform: uppercase;
-    font-size: .5em;
 }
 
-.virtual-keyboard DIV:hover {
-    background: #004DcA;
+.virtual-keyboard DIV:hover,
+.virtual-keyboard DIV:focus {
+    background: rgba(164,164,164,1);
+}
+
+.initials-container .highscore-initials{
+    font-size: 2em;
+    color: rgba(164,164,164,1);
+    font-weight: 600;
+    letter-spacing: .25em;
+    line-height: 2em;
+    min-height: 2em;
+    margin: 0;
+}
+.initials-container .caret {
+    width: 1em;
+    height: 2em;
+    background: rgba(0,164,0,0);
+    animation: blink 1s linear 0s infinite;
+    margin-left: .25em
+}
+@keyframes blink {
+    0%   { background: rgba(128,128,128,1) }
+    47%  { background: rgba(164,164,164,1) }
+    50%  { background: rgba(164,164,164,0) }
+    97%  { background: rgba(164,164,164,0) }
+    100% { background: rgba(164,164,164,1) }
+}
+
+
+
+
+
+.hidden {
+    display: none;
 }

@@ -63,12 +63,17 @@
 		<h1>Game over</h1>
 
 		<div class="highscores">
-			Enter your initials
-			<br />
-			<input name="initials" class="initials" maxlength="3" />
+			<h2>Enter your initials</h2>
+			<input name="initials" class="initials" value="..." maxlength="3" size="3" />
+			<div style="display: flex; align-items: center">
+				<div class="initials-container">
+					<span contenteditable="true" class="virtual-keyboard-input highscore-initials"></span>
+					<div class="caret"></div>
+				</div>
+				<div class="initials-submit">↲</div>
+			</div>
 			<!-- "virtual keyboard" for highscore initials input -->
-			<div class="virtual-keyboard hidden"></div>
-
+			<div class="virtual-keyboard"></div>
 		</div>
 		<a href="#" class="btn btn-home">Home</a>
 	</div>

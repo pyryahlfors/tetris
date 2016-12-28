@@ -493,6 +493,15 @@
 		container.appendChild(docFrag);
 	};
 
+	tetris.prototype.home = function(){
+		clearInterval(this.timer);
+		delete(this.timer);
+		this.getTopScores();
+		document.querySelector('.page.home').classList.remove('hidden');
+		document.querySelector('.game-over-container').classList.remove('visible');
+		document.querySelector('.pause-screen-container').classList.remove('visible');
+	};
+
 	tetris.prototype.setTopScores = function(scoreData){
 		document.querySelector('.game-over').classList.remove('highscores-visible');
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
@@ -505,26 +514,10 @@
 		for(var i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
 		// You did! good for you mate
 		if(rank < 9999){
-			var inputField = document.querySelector('INPUT.initials');
-			document.querySelector('.virtual-keyboard').classList.remove('hidden');
-			scores[rank][2] = inputField.value.toUpperCase();
-
-			// move this somewhere else. Remove eventlisteners and add again 
-			if(!this.hasVirtualKeyboardBound){
-				document.addEventListener('virtualKeyboardKeyUp', function(evt){
-					if(inputField.value.length < 3){inputField.value+=evt.detail.character;}
-					else{inputField.value=evt.detail.character;}
-					scores[rank][2] = inputField.value.toUpperCase();
-					localStorage.setItem('scores', JSON.stringify(scores));
-				}, false);
-
-				inputField.addEventListener('keyup', function(){
-					scores[rank][2] = this.value.toUpperCase();
-					localStorage.setItem('scores', JSON.stringify(scores));
-				}, false);
-			this.hasVirtualKeyboardBound = true;
-			}
-			document.querySelector('.game-over').classList.add('highscores-visible');
+			var vent = new CustomEvent("newTopScore", {detail: {
+				'rank' : rank
+			}});
+			document.dispatchEvent(vent);
 		}
 		localStorage.setItem('scores', JSON.stringify(scores));
 	};
@@ -584,17 +577,23 @@ var btnPause = document.querySelectorAll('.btn-pause');
 
 [].forEach.call(btnHome, function(btn){
 	btn.addEventListener(tetris.touchEvent, function(){
-		clearInterval(tetris.timer);
-		delete(tetris.timer);
-		tetris.getTopScores();
-		document.querySelector('.page.home').classList.remove('hidden');
-		document.querySelector('.game-over-container').classList.remove('visible');
-		document.querySelector('.pause-screen-container').classList.remove('visible');
+		tetris.home();
 		}, false)
 	});
 
+var submitNewHighScore = document.querySelector('.initials-submit');
+submitNewHighScore.addEventListener(tetris.touchEvent, function(){
+	var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
+	scores[tetris.submitData.rank][2] = document.querySelector('INPUT.initials').value;
+	localStorage.setItem('scores', JSON.stringify(scores));
+	document.querySelector('.game-over').classList.remove('highscores-visible');
+	document.querySelector('.game-over .btn-home').classList.remove('hidden');
+	tetris.home();
+}, false);
+
 // Creata virtual keyboard
 var keyboardContainer = document.querySelector('.virtual-keyboard');
+// These characters are cool. Others suck :(
 var keys = '0123456789 abcdefghijklmnopqrstuvwxyz-#!';
 
 var docFrag = document.createDocumentFragment();
@@ -609,3 +608,16 @@ for(var i=0, j=keys.length; i<j;i++){
 	docFrag.appendChild(virtualKey);
 }
 keyboardContainer.appendChild(docFrag);
+
+document.addEventListener('virtualKeyboardKeyUp', function(evt){
+	var el = document.querySelector('.virtual-keyboard-input');
+	if(el.innerHTML.length <3){el.innerHTML+= evt.detail.character;}
+	else{el.innerHTML= evt.detail.character;}
+	document.querySelector('INPUT.initials').value = el.innerHTML;
+}, false);
+
+document.addEventListener('newTopScore', function(evt){
+	document.querySelector('.game-over').classList.add('highscores-visible');
+	document.querySelector('.game-over .btn-home').classList.add('hidden');
+	tetris.submitData = evt.detail;
+}, false);
