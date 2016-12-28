@@ -282,6 +282,7 @@ input.initials {
     display: none;
 }
 
+/* Virtual keyboard */
 .virtual-keyboard {
     display: flex;
     flex-wrap: wrap;
@@ -327,9 +328,6 @@ input.initials {
     97%  { background: rgba(164,164,164,0) }
     100% { background: rgba(164,164,164,1) }
 }
-
-
-
 
 
 .hidden {
