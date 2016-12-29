@@ -420,7 +420,7 @@
 
 				// Update highscore data ->
 				var topScoreData = [];
-				this.setTopScores({'scores' : [this.score, this.totalLines, '---', new Date().getTime()]});
+				this.setTopScores({'scores' : [this.score, this.totalLines, '---', new Date().getTime(), this.level]});
 				// <- Update highscore data
 
 				return;
@@ -539,7 +539,10 @@
 		// You did! good for you mate
 		if(rank < 9999){
 			var vent = new CustomEvent("newTopScore", {detail: {
-				'rank' : rank
+				'rank' : rank,
+				'score' : scoreData.scores[0],
+				'lines' : scoreData.scores[1],
+				'level' : scoreData.scores[4]
 			}});
 			document.dispatchEvent(vent);
 		}
@@ -651,6 +654,9 @@
 	}, false);
 
 	document.addEventListener('newTopScore', function(evt){
+		document.querySelector('.highscore-lines').innerHTML = evt.detail.lines;
+		document.querySelector('.highscore-level').innerHTML = evt.detail.level;
+		document.querySelector('.highscore-score').innerHTML = evt.detail.score;
 		// Show initials input and hide home button (submit button will do the same thing)
 		document.querySelector('.game-over').classList.add('highscores-visible');
 		document.querySelector('.game-over .btn-home').classList.add('hidden');

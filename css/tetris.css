@@ -357,11 +357,23 @@ input.initials {
 }
 
 .initials-container .caret {
+<<<<<<< HEAD
   width: .25rem;
   height: 3rem;
   background: #fff;
   animation: blink 1s ease 0s infinite;
   margin-left: .25em
+=======
+    width: 1em;
+    height: 2em;
+    line-height: 2em;
+    min-height: 2em;
+    background: rgba(0,164,0,0);
+    animation: blink 1s linear 0s infinite;
+    margin-left: .25em;
+    position: relative;
+    top: 1.1em;
+>>>>>>> ee93ae34595e0d90d27932ddfc005439e6c149b5
 }
 
 @keyframes blink {
@@ -391,3 +403,8 @@ body.landscape .landscape-lock {
     color: #000;
     font-size: 15vw;
     }
+
+.game-over .btn-home {
+  position: absolute;
+  bottom: 0;
+  }
