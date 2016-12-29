@@ -705,3 +705,17 @@ var fpAnimate = {
 		params.el.addEventListener("webkitAnimationIteration", iterate, false);
 	}
 };
+
+
+
+
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('./tetris_sw.js', {scope: './'})
+		.then(function(reg) {
+			// registration worked
+			console.log('Registration succeeded. Scope is ' + reg.scope);
+		}).catch(function(error) {
+			// registration failed
+			console.log('Registration failed with ' + error);
+		});
+	}

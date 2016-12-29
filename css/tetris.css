@@ -227,6 +227,15 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
   }
 }
 
+.highscore-container {
+    position: absolute;
+    top: 25vw;
+    bottom: 64px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
 .highscore-container .title-row {
   color:#325F5B;
   font-size:14px;

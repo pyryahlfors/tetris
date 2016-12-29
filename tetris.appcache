@@ -1,0 +1,27 @@
+CACHE MANIFEST
+# 2016-12-29 - 0001
+
+# CSS
+./css/te3s.css
+./css/tetris.css
+./css/touch.css
+
+# Fonts
+./fonts/te3s.eot
+./fonts/te3s.svg
+./fonts/te3s.ttf
+./fonts/te3s.woff
+
+# Images
+./img/touch-icon-iphone-6-plus.png
+
+# JS
+./js/tetris.js
+
+# Root
+./index.html
+
+
+NETWORK:
+
+FALLBACK:
