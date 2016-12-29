@@ -64,23 +64,28 @@
 <!-- / Gamefield -->
 
 <!-- Game over / -->
-<div class="game-over-container">
-	<div class="game-over">
-		<h1>Game over</h1>
-
+<div class="game-over-container visible">
+	<div class="game-over highscores-visible">
 		<div class="highscores">
-			Score: 100 Lines: 12 Level: 2
-			<h2>Enter your initials</h2>
-			<input name="initials" class="initials" value="Ville" />
-			<div class="initials-container">
-				<span contenteditable="true" class="virtual-keyboard-input highscore-initials"></span>
-				<div class="caret"></div>
-			</div>
+
+			<header>
+				<h1>Game over</h1>
+				Score: 100 Lines: 12 Level: 2
+				<h2>Enter your initials</h2>
+				<input name="initials" class="initials" value="Ville" />
+				<div class="initials-container">
+					<span contenteditable="true" class="virtual-keyboard-input highscore-initials"></span>
+					<div class="caret"></div>
+				</div>
+			</header>
+
 			<div class="initials-submit btn">YEAH</div>
 
-			<!-- "virtual keyboard" for highscore initials input -->
+				<!-- "virtual keyboard" for highscore initials input -->
 			<div class="virtual-keyboard"></div>
+
 		</div>
+
 		<a href="#" class="btn btn-home">Home</a>
 	</div>
 </div>

@@ -619,7 +619,7 @@
 	// Create virtual keyboard
 	var keyboardContainer = document.querySelector('.virtual-keyboard');
 	// These characters are cool. Other characters suck :(
-	var keys = '0123456789 abcdefghijklmnopqrstuvwxyz-#!.?';
+	var keys = '0123456789qwertyuiopåasdfghjklöäzxcvbnm@-# !?';
 
 	var docFrag = document.createDocumentFragment();
 	for(var i=0, j=keys.length; i<j;i++){

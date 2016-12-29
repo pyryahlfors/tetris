@@ -39,8 +39,9 @@ body, html {
 *, *:after, *:before {
     box-sizing: border-box;
 }
-header{margin-top:2rem;}
-header, section{padding:.5rem 1.5rem;}
+.home header{margin-top:2rem;}
+
+.home header, .home section{padding:.5rem 1.5rem;}
 
 h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
 /* */
@@ -128,16 +129,43 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     transition-timing-function: ease-out;
     text-align: center;
 }
-.game-over-container,
 .pause-screen-container{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.9);
     z-index: -1;
     opacity: 0;
+}
+
+.game-over-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:  #141423;
+  z-index: -1;
+  opacity: 0;
+}
+
+.highscores{
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+-ms-flex-direction: column;
+flex-direction: column;
+}
+
+.highscores header{
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .game-over-container.visible,
@@ -145,8 +173,6 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     z-index: 1;
     opacity: 1;
 }
-
-
 
 
 /* Buttons, helpers etc. */
@@ -256,25 +282,21 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     height:100%;
 }
 
-.game-over.highscores-visible .highscores{display: block;}
+.game-over.highscores-visible .highscores{display: flex;}
 
 .initials-container {
     display: flex;
-    width: 100%;
-    background: #111;
-    border: 0;
     color: #fff;
-    border-bottom: 4px solid #333;
     z-index: 999;
-    margin : 20px 0;
-    align-items: center;
+
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
 
 .initials-submit {
     z-index: 999;
-
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -290,22 +312,26 @@ input.initials {
     flex-wrap: wrap;
     max-width: 100%;
     z-index: 9999;
-    margin: 20px 0;
+    background-color:#fff;
 }
 
 .virtual-keyboard .key-container {
-    background: rgba(128,128,128,1);
     color: #fff;
-    padding: 5px;
-    text-align: center;
     width: 10%;
     text-transform: uppercase;
 }
 
-.virtual-keyboard .key-container:hover,
-.virtual-keyboard .key-container:focus {
-    background: rgba(164,164,164,1);
+.virtual-keyboard .key-container:nth-child(43) {
+flex:1;
 }
+
+.key-container div{
+  background:#141423;
+  line-height:3rem;
+  font-size:1.5rem;
+}
+
+.key-container:active div{ background-color: #07f; }
 
 .initials-container .highscore-initials{
     font-size: 2em;
