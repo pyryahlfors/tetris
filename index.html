@@ -64,17 +64,17 @@
 <!-- / Gamefield -->
 
 <!-- Game over / -->
-<div class="game-over-container visible">
-	<div class="game-over highscores-visible">
+<div class="game-over-container">
+	<div class="game-over">
 		<div class="highscores">
 
 			<header>
 				<h1>Game over</h1>
-				Score: 100 Lines: 12 Level: 2
+				Score: <span class="highscore-score"></span> Lines: <span class="highscore-lines"></span> Level: <span class="highscore-level"></span>
 				<h2>Enter your initials</h2>
 				<input name="initials" class="initials" value="Ville" />
 				<div class="initials-container">
-					<span contenteditable="true" class="virtual-keyboard-input highscore-initials"></span>
+					<span class="virtual-keyboard-input highscore-initials"></span>
 					<div class="caret"></div>
 				</div>
 			</header>
