@@ -119,10 +119,23 @@
 			var maxHeight = (thisGameContainer.height > thisGameContainer.width) ? thisGameContainer.height : thisGameContainer.width;
 			testY = Math.floor(maxHeight/(this.gameFieldHeight+1));
 		}
-
 		else {
 			testY = Math.floor(thisGameContainer.height/(this.gameFieldHeight+1));
 		}
+
+		var checkWindowOrientation = function(){
+			if(Math.abs(window.orientation) === 90) {
+				if(tetris.timer) {
+					tetris.pauseGame();
+					}
+				document.body.classList.add('landscape');
+			}
+			else {
+				document.body.classList.remove('landscape');
+			}
+		};
+
+		window.addEventListener("orientationchange", checkWindowOrientation, false);
 
 		this.blockHeight = testY; // Scale block size to match screen resolution
 		this.blockWidth = testY;
