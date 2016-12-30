@@ -310,10 +310,15 @@
 			};
 		};
 
+	tetris.randomizeBlock = function(){
+			
+	};
 	// Randomize new block
 	tetris.randomizeBlock = function(){
 		this.leftPos = 3;
-		this.currentblock = this.blocks[Math.round(Math.random()*(this.blocks.length-1))];
+		this.currentblock = this.nextBlock || this.blocks[Math.round(Math.random()*(this.blocks.length-1))];
+		this.nextBlock = this.blocks[Math.round(Math.random()*(this.blocks.length-1))];
+		tetris.visualizeNextBlock();
 		this.rotation = Math.round(Math.random()*(this.currentblock.length-1));
 		var spacing = this.getBlockSpacing({'rotation': this.rotation});
 		this.blockSpacingLeft = spacing.spacingLeft;
