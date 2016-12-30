@@ -80,13 +80,6 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     align-items: center;
 }
 
-.game-controls {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: 24px;
-}
-
 
 .tetris .gamefield-container {
     position: absolute;
@@ -261,11 +254,29 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
   flex: 1;
 }
 .game-over .scores{position:static;}
+
+.btn-pause, .next-block {
+
+  width:12%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .score-box {
     color: rgba(255,255,255,.8);
-    width: 100px;
+    width:25.333%;
     text-align: center;
-    padding: 24px;
+    padding: 8px;
 }
 
 .score-box h2 {
