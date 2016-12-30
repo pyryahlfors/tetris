@@ -310,8 +310,8 @@
 			};
 		};
 
-	tetris.randomizeBlock = function(){
-			
+	tetris.visualizeNextBlock = function(){
+
 	};
 	// Randomize new block
 	tetris.randomizeBlock = function(){
