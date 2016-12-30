@@ -47,6 +47,14 @@
 			]
 		},
 		theme : 'vauhtiVille',
+		blocksSvg: [
+			'<rect x="0" y="9" width="24" height="6"/>',
+			'<rect x="6" y="6" width="12" height="12"/>',
+			'<path d="M3,18l0,-6l6,0l0,-6l12,0l0,6l-6,0l0,6l-12,0Z"/>',
+			'<path d="M9,12l-6,0l0,-6l12,0l0,6l6,0l0,6l-12,0l0,-6Z"/>',
+			'<path d="M15,6l6,0l0,12l-18,0l0,-6l12,0l0,-6Z"/>',
+			'<path d="M3,6l6,0l0,6l12,0l0,6l-18,0l0,-12Z"/>',
+			'<path d="M3,12l6,0l0,-6l6,0l0,6l6,0l0,6l-18,0l0,-6Z"/>'],
 
 		// blocks
 		blocks : [
@@ -310,7 +318,9 @@
 			};
 		};
 
-	tetris.visualizeNextBlock = function(params){
+	tetris.visualizeNextBlock = function(params, nxt){
+		document.querySelector('.next-block').innerHTML = '<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">'+tetris.blocksSvg[nxt]+'</svg>';
+/*
 		var temp = "";
 		for(var y=0, yy=4; y<yy;y++){
 			for(var x=0, xx=4; x<xx;x++){
@@ -319,14 +329,16 @@
 			temp+='\r\n';
 		}
 		console.log(temp);
+		*/
+
 	};
 	// Randomize new block
 	tetris.randomizeBlock = function(){
 		this.leftPos = 3;
-		var randSeed = Math.round(Math.random()*(this.blocks.length-1));
-		this.currentblock = this.nextBlock || this.blocks[randSeed];
-		this.nextBlock = this.blocks[randSeed];
-		tetris.visualizeNextBlock(this.nextBlock);
+		this.randSeed = Math.round(Math.random()*(this.blocks.length-1));
+		this.currentblock = this.nextBlock || this.blocks[this.randSeed];
+		this.nextBlock = this.blocks[this.randSeed];
+		tetris.visualizeNextBlock(this.nextBlock, this.randSeed);
 		this.rotation = Math.round(Math.random()*(this.currentblock.length-1));
 		var spacing = this.getBlockSpacing({'rotation': this.rotation});
 		this.blockSpacingLeft = spacing.spacingLeft;
