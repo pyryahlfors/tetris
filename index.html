@@ -13,129 +13,135 @@
 </head>
 
 <body>
-<!-- Home / -->
-<div class="page home">
+	<!-- Home / -->
+	<div class="page home">
+		<header>
+			<h1>TE3S</h1>
+		</header>
 
-	<header>
-		<h1>TE3S</h1>
-	</header>
-
-	<section class="highscore-container">
-		<div class="score-line title-row">
-			<div>#</div>
-			<div>Name</div>
-			<div>Score</div>
-			<div>Lines</div>
-		</div>
-	</section>
-
-	<a href="#" class="btn btn-start" data-action="start">Start</a>
-
-</div>
-<!-- / Home -->
-
-<!-- Gamefield / -->
-<div class="page tetris">
-	<div class="gamefield-container">
-		<canvas></canvas>
-		<div class="scores">
-			<div class="score-box score-box-side tetris-lines-container">
-				<h2>Lines</h2><span>-</span>
+		<section class="highscore-container">
+			<div class="score-line title-row">
+				<div>#</div>
+				<div>Name</div>
+				<div>Score</div>
+				<div>Lines</div>
 			</div>
-			<div class="score-box tetris-score-container">
-				<h2>Score</h2><span>-</span>
-			</div>
-			<div class="score-box score-box-side tetris-level-container">
-				<h2>Level</h2><span>-</span>
-			</div>
-		</div>
-	    <div class="tetris-touch-point-container">
-	        <div class="tetris-touch-control-right"></div>
-	        <div class="tetris-touch-control-left"></div>
-	        <div class="tetris-touch-control-drop"></div>
-	        <div class="tetris-touch-control-rotate"></div>
-	    </div>
+		</section>
+
+		<a href="#" class="btn btn-start" data-action="start">Start</a>
 	</div>
+	<!-- / Home -->
 
-	<div class="game-controls">
-		<a href="#" class="btn btn-pause"><span class="icon-ios-pause"></span></a>
-	</div>
-</div>
-<!-- / Gamefield -->
-
-<!-- Game over / -->
-<div class="game-over-container">
-	<div class="game-over">
-		<div class="highscores">
-
-			<header>
-
-				<h1>Game over</h1>
-
-				<div class="scores">
-					<div class="score-box score-box-side tetris-lines-container">
-						<h2>Lines</h2><span class="highscore-lines">-</span>
-					</div>
-					<div class="score-box tetris-score-container">
-						<h2>Score</h2><span class="highscore-score">-</span>
-					</div>
-					<div class="score-box score-box-side tetris-level-container">
-						<h2>Level</h2><span class="highscore-level">-</span>
-					</div>
+	<!-- Gamefield / -->
+	<div class="page tetris">
+		<div class="gamefield-container">
+			<canvas></canvas>
+			<div class="scores">
+				<div class="score-box score-box-side tetris-lines-container">
+					<h2>Lines</h2><span>-</span>
 				</div>
-
-				<h2>Enter your initials</h2>
-
-				<input name="initials" class="initials" value="Ville" />
-
-				<div class="initials-container">
-					<span class="virtual-keyboard-input highscore-initials"></span>
-					<div class="caret"></div>
+				<div class="score-box tetris-score-container">
+					<h2>Score</h2><span>-</span>
 				</div>
-
-			</header>
-
-			<div class="initials-submit btn">SUBMIT
-
-				<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-				    <path d="M22 12l-4-4v3H3v2h15v3z"/>
-				    <path d="M0 0h24v24H0z" fill="none"/>
-				</svg>
+				<div class="score-box score-box-side tetris-level-container">
+					<h2>Level</h2><span>-</span>
+				</div>
 			</div>
+			<div class="tetris-touch-point-container">
+				<div class="tetris-touch-control-right"></div>
+				<div class="tetris-touch-control-left"></div>
+				<div class="tetris-touch-control-drop"></div>
+				<div class="tetris-touch-control-rotate"></div>
+			</div>
+		</div>
+
+		<div class="game-controls">
+			<a href="#" class="btn btn-pause"><span class="icon-ios-pause"></span></a>
+		</div>
+	</div>
+	<!-- / Gamefield -->
+
+		<!-- Game over / -->
+	<div class="game-over-container">
+		<div class="game-over">
+			<!-- Show this when player scores top-10 score / -->
+			<div class="highscores">
+				<header>
+					<h1>Game over</h1>
+					<div class="scores">
+						<div class="score-box score-box-side tetris-lines-container">
+							<h2>Lines</h2><span class="highscore-lines">-</span>
+						</div>
+						<div class="score-box tetris-score-container">
+							<h2>Score</h2><span class="highscore-score">-</span>
+						</div>
+						<div class="score-box score-box-side tetris-level-container">
+							<h2>Level</h2><span class="highscore-level">-</span>
+						</div>
+					</div>
+
+					<h2>Enter your initials</h2>
+					<input name="initials" class="initials" value="Ville" />
+					<div class="initials-container">
+						<span class="virtual-keyboard-input highscore-initials"></span>
+						<div class="caret"></div>
+					</div>
+				</header>
+
+				<div class="initials-submit btn">SUBMIT
+					<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+					    <path d="M22 12l-4-4v3H3v2h15v3z"/>
+					    <path d="M0 0h24v24H0z" fill="none"/>
+					</svg>
+				</div>
 
 				<!-- "virtual keyboard" for highscore initials input -->
-			<div class="virtual-keyboard"></div>
+				<div class="virtual-keyboard"></div>
+			</div>
 
+			<!-- Show this when player score is subpar / -->
+			<div class="no-highscore">
+				<header>
+					<h1>Game over</h1>
+					<div class="scores">
+						<div class="score-box score-box-side tetris-lines-container">
+							<h2>Lines</h2><span class="highscore-lines">-</span>
+						</div>
+						<div class="score-box tetris-score-container">
+							<h2>Score</h2><span class="highscore-score">-</span>
+						</div>
+						<div class="score-box score-box-side tetris-level-container">
+							<h2>Level</h2><span class="highscore-level">-</span>
+						</div>
+					</div>
+				</header>
+				<a href="#" class="btn btn-home">Home</a>
+			</div>
 		</div>
-
-		<a href="#" class="btn btn-home">Home</a>
 	</div>
-</div>
-<!-- / Game over -->
+	<!-- / Game over -->
 
-<!-- Pause screen / -->
-<div class="pause-screen-container">
-	<div class="pause-screen">
-		<a href="#" class="btn btn-pause btn-with-icon">
-			<span class="icon-ios-play"></span>
-			Continue
-		</a>
-		<a href="#" class="btn btn-restart btn-with-icon">
-			<span class="icon-ios-refresh-empty"></span>
-			Restart
-		</a>
-		<a href="#" class="btn btn-home btn-with-icon">
-			<span class="icon-ios-refresh-empty"></span>
-			Quit
-		</a>
+	<!-- Pause screen / -->
+	<div class="pause-screen-container">
+		<div class="pause-screen">
+			<a href="#" class="btn btn-pause btn-with-icon">
+				<span class="icon-ios-play"></span> Continue
+			</a>
+			<a href="#" class="btn btn-restart btn-with-icon">
+				<span class="icon-ios-refresh-empty"></span> Restart
+			</a>
+			<a href="#" class="btn btn-home btn-with-icon">
+				<span class="icon-ios-refresh-empty"></span> Quit
+			</a>
+		</div>
 	</div>
-</div>
-<!-- / Pause screen -->
+	<!-- / Pause screen -->
 
-<div class="landscape-lock">
-	Juuh
-</div>
-<script src="js/tetris.js"></script>
+	<div class="landscape-lock">
+		Juuh
+	</div>
+	<script src="js/tetris.js"></script>
 
 </body>
+
 </html>

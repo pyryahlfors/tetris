@@ -527,7 +527,16 @@
 	};
 
 	tetris.setTopScores = function(scoreData){
-		document.querySelector('.game-over').classList.remove('highscores-visible');
+		var i,j;
+		var hsScore = document.querySelectorAll('.highscore-score');
+		var hsLines = document.querySelectorAll('.highscore-lines');
+		var hsLevel = document.querySelectorAll('.highscore-level');
+
+		for(i=0, j=hsScore.length; i<j;i++){hsScore[i].innerHTML = scoreData.scores[0];}
+		for(i=0, j=hsLines.length; i<j;i++){hsLines[i].innerHTML = scoreData.scores[1];}
+		for(i=0, j=hsLevel.length; i<j;i++){hsLevel[i].innerHTML = scoreData.scores[4];}
+
+
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		scores.push(scoreData.scores);
 		scores = scores.sort(function(a,b) {return b[0] - a[0];});
@@ -535,9 +544,11 @@
 
 		// Check if you made into top 10
 		var rank = 9999;
-		for(var i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
+		for(i=0, j= scores.length; i<j;i++){if(scores[i][3] === scoreData.scores[3]) {rank = i;}}
+
 		// You did! good for you mate
 		if(rank < 9999){
+			document.querySelector('.game-over').classList.add('highscores-visible');
 			var vent = new CustomEvent("newTopScore", {detail: {
 				'rank' : rank,
 				'score' : scoreData.scores[0],
@@ -545,6 +556,9 @@
 				'level' : scoreData.scores[4]
 			}});
 			document.dispatchEvent(vent);
+		}
+		else {
+			document.querySelector('.game-over').classList.remove('highscores-visible');
 		}
 		localStorage.setItem('scores', JSON.stringify(scores));
 	};
@@ -583,26 +597,26 @@
 		btn.addEventListener(tetris.touchEvent, function(){
 			document.querySelector('.page.home').classList.add('hidden');
 			tetris.init();
-			}, false)
+		}, false);
 		});
 
 	[].forEach.call(btnPause, function(btn){
 		btn.addEventListener(tetris.touchEvent, function(){
 			tetris.pauseGame();
-			}, false)
+		}, false);
 		});
 
 	[].forEach.call(btnRestart, function(btn){
 		btn.addEventListener(tetris.touchEvent, function(){
 			tetris.resetGamefield();
 			tetris.pauseGame();
-			}, false)
+		}, false);
 		});
 
 	[].forEach.call(btnHome, function(btn){
 		btn.addEventListener(tetris.touchEvent, function(){
 			tetris.home();
-			}, false)
+		}, false);
 		});
 
 	// Change the initials for top score
@@ -613,8 +627,7 @@
 		var scores = JSON.parse(localStorage.getItem('scores')) || Array(10).fill([0,0,'---',-1]);
 		scores[tetris.submitData.rank][2] = document.querySelector('INPUT.initials').value;
 		localStorage.setItem('scores', JSON.stringify(scores));
-		document.querySelector('.game-over').classList.remove('highscores-visible');
-		document.querySelector('.game-over .btn-home').classList.remove('hidden');
+
 		tetris.home();
 		delete tetris.submitData;
 	}, false);
@@ -654,12 +667,6 @@
 	}, false);
 
 	document.addEventListener('newTopScore', function(evt){
-		document.querySelector('.highscore-lines').innerHTML = evt.detail.lines;
-		document.querySelector('.highscore-level').innerHTML = evt.detail.level;
-		document.querySelector('.highscore-score').innerHTML = evt.detail.score;
-		// Show initials input and hide home button (submit button will do the same thing)
-		document.querySelector('.game-over').classList.add('highscores-visible');
-		document.querySelector('.game-over .btn-home').classList.add('hidden');
 		tetris.submitData = evt.detail;
 	}, false);
 
@@ -670,48 +677,48 @@ var fpAnimate = {
 	},
 
 	watch: function( params ){
-		if (!params.el) {return;};
-		if (!params.execute) {params.execute = function(){}};
-		if (!params.listen) {params.listen = function(){}};
-		if( !params.iterate ) {params.iterate = function(){};};
+		if (!params.el) {return;}
+		if (!params.execute) {params.execute = function(){};}
+		if (!params.listen) {params.listen = function(){};}
+		if( !params.iterate ) {params.iterate = function(){};}
 
 // Animation start - listen
 		var listen = function(){
 			params.listen();
-			}
+		};
 
 		if(params.unwatch) {
 			listen = function(){
 				params.listen();
 				params.el.removeEventListener("animationstart", listen);
 				params.el.removeEventListener("webkitAnimationStart", listen);
-				}
+			};
 			}
 
 // Animation iterate
 		var iterate = function(){
 			params.iterate();
-			}
+		};
 
 		if(params.unwatch) {
 			iterate = function(){
 				params.iterate();
 				params.el.removeEventListener("animationiteration", iterate);
 				params.el.removeEventListener("webkitAnimationIteration", iterate);
-				}
+			};
 			}
 
 // Execute
 		var execute = function(){
 			params.execute();
-			}
+		};
 
 		if(params.unwatch) {
 			execute = function(){
 				params.execute();
 				params.el.removeEventListener("animationend", execute);
 				params.el.removeEventListener("webkitAnimationEnd", execute);
-				}
+			};
 			}
 
 
