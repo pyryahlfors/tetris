@@ -549,13 +549,13 @@
 		// You did! good for you mate
 		if(rank < 9999){
 			document.querySelector('.game-over').classList.add('highscores-visible');
-			var vent = new CustomEvent("newTopScore", {detail: {
+			// Set submit data for highscore initial input
+			tetris.submitData = {
 				'rank' : rank,
 				'score' : scoreData.scores[0],
 				'lines' : scoreData.scores[1],
 				'level' : scoreData.scores[4]
-			}});
-			document.dispatchEvent(vent);
+			};
 		}
 		else {
 			document.querySelector('.game-over').classList.remove('highscores-visible');
@@ -669,9 +669,9 @@
 	document.addEventListener('newTopScore', function(evt){
 		tetris.submitData = evt.detail;
 	}, false);
-
 })();
 
+// Fixed point CSS animtion listener
 var fpAnimate = {
 	init: function(){
 	},
@@ -693,7 +693,7 @@ var fpAnimate = {
 				params.el.removeEventListener("animationstart", listen);
 				params.el.removeEventListener("webkitAnimationStart", listen);
 			};
-			}
+		}
 
 // Animation iterate
 		var iterate = function(){
@@ -706,7 +706,7 @@ var fpAnimate = {
 				params.el.removeEventListener("animationiteration", iterate);
 				params.el.removeEventListener("webkitAnimationIteration", iterate);
 			};
-			}
+		}
 
 // Execute
 		var execute = function(){
@@ -719,8 +719,7 @@ var fpAnimate = {
 				params.el.removeEventListener("animationend", execute);
 				params.el.removeEventListener("webkitAnimationEnd", execute);
 			};
-			}
-
+		}
 
 		params.el.addEventListener("animationstart", listen, false);
 		params.el.addEventListener("animationend", execute, false);
