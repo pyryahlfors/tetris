@@ -326,6 +326,7 @@ input.initials {
   border-radius:0.25rem;
   line-height:3rem;
   font-size:1.5rem;
+  white-space: pre;
 }
 
 .key-container:active div{
@@ -335,11 +336,12 @@ input.initials {
 }
 
 .initials-container .highscore-initials{
-  font-size: 3Rem;
+  font-size: 3rem;
   color: #fff;
   font-weight: 400;
   letter-spacing: .25em;
   line-height: 3rem;
+  white-space: pre;
 }
 
 .initials-container .caret {
@@ -347,7 +349,6 @@ input.initials {
   height: 3rem;
   background: #fff;
   animation: blink 1s ease 0s infinite;
-  margin-left: .25em
 }
 
 @keyframes blink {
