@@ -310,15 +310,23 @@
 			};
 		};
 
-	tetris.visualizeNextBlock = function(){
-
+	tetris.visualizeNextBlock = function(params){
+		var temp = "";
+		for(var y=0, yy=4; y<yy;y++){
+			for(var x=0, xx=4; x<xx;x++){
+				temp+=(params[0][(y*yy)+x] !== 0) ? '█' : ' ';
+			}
+			temp+='\r\n';
+		}
+		console.log(temp);
 	};
 	// Randomize new block
 	tetris.randomizeBlock = function(){
 		this.leftPos = 3;
-		this.currentblock = this.nextBlock || this.blocks[Math.round(Math.random()*(this.blocks.length-1))];
-		this.nextBlock = this.blocks[Math.round(Math.random()*(this.blocks.length-1))];
-		tetris.visualizeNextBlock();
+		var randSeed = Math.round(Math.random()*(this.blocks.length-1));
+		this.currentblock = this.nextBlock || this.blocks[randSeed];
+		this.nextBlock = this.blocks[randSeed];
+		tetris.visualizeNextBlock(this.nextBlock);
 		this.rotation = Math.round(Math.random()*(this.currentblock.length-1));
 		var spacing = this.getBlockSpacing({'rotation': this.rotation});
 		this.blockSpacingLeft = spacing.spacingLeft;
