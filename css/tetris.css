@@ -101,13 +101,11 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-
-    background:  #141423;
-
-    background: -webkit-linear-gradient(to bottom, #141423 , #19192E); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to bottom, #141423 , #19192E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background:  #19192E;
+    bottom: 0;
 }
+
+
 
 .game-over, .pause-screen {
     position: absolute;
@@ -256,7 +254,8 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     height : 100%;
 }
 
-.game-over header{
+.game-over header,
+.pause-screen header{
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -286,8 +285,10 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     font-size: 24px;
     line-height: 28px;
 }
-.game-over h1 { font-size:2rem; line-height:2rem; font-weight:400; margin-top:3rem; }
-.game-over h2 { font-size:1rem; line-height:1rem; font-weight:400; }
+.game-over h1,
+.pause-screen h1 { font-size:2rem; line-height:2rem; font-weight:400; margin-top:3rem; }
+.game-over h2,
+.pause-screen h2 { font-size:1rem; line-height:1rem; font-weight:400; }
 
 .game-over.highscores-visible .highscores{display: flex;}
 .game-over.highscores-visible .no-highscore {display: none;}
