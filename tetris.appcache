@@ -7,10 +7,11 @@ CACHE MANIFEST
 ./css/touch.css
 
 # Fonts
-./fonts/te3s.eot
-./fonts/te3s.svg
-./fonts/te3s.ttf
-./fonts/te3s.woff
+./fonts/space-mono-v1-latin-regular.eot
+./fonts/space-mono-v1-latin-regular.svg
+./fonts/space-mono-v1-latin-regular.ttf
+./fonts/space-mono-v1-latin-regular.woff
+./fonts/space-mono-v1-latin-regular.woff2
 
 # Images
 ./img/touch-icon-iphone-6-plus.png
