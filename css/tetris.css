@@ -68,7 +68,7 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
 .scores {
     width: 100%;
     position: absolute;
-    padding: 16px;
+    padding: 24px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -84,7 +84,7 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     position: absolute;
     top: 0;
     width: 100%;
-    padding: 8px;
+    padding: 24px;
 }
 
 
@@ -264,14 +264,14 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
 .game-over .scores{position:static;}
 .score-box {
     color: rgba(255,255,255,.8);
-    width: 90px;
+    width: 100px;
     text-align: center;
-    padding: 16px;
+    padding: 24px;
 }
 
 .score-box h2 {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
     font-weight: 400;
 }
 
