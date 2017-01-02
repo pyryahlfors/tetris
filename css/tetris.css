@@ -128,6 +128,9 @@ h1{font-weight:400; font-size:15vw; color:#E8F8F6;}
     opacity: 0;
 }
 
+.pause-screen-container {
+    background: rgba(20,20,32,.8);
+}
 .game-over-container.visible,
 .pause-screen-container.visible {
     z-index: 1;
