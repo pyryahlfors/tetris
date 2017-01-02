@@ -2,7 +2,7 @@
     width: 300vw;
     height: 300vw;
     position: absolute;
-    top: 70%;
+    top: 65%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%) rotate(45deg) ;
 }

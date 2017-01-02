@@ -133,9 +133,7 @@
 
 		var checkWindowOrientation = function(){
 			if(Math.abs(window.orientation) === 90) {
-				if(tetris.timer) {
-					tetris.pauseGame();
-					}
+				if(tetris.timer) {tetris.pauseGame(true);}
 				document.body.classList.add('landscape');
 			}
 			else {
@@ -144,6 +142,10 @@
 		};
 
 		window.addEventListener("orientationchange", checkWindowOrientation, false);
+		window.addEventListener("blur",function(){
+			console.log('juuh');
+			if(tetris.timer) {tetris.pauseGame(true);}
+		}, false);
 
 		this.blockHeight = testY; // Scale block size to match screen resolution
 		this.blockWidth = testY;
@@ -440,6 +442,7 @@
 		window.requestAnimationFrame(function() {
 			if(this.line < 0 && this.dropRowPossible > 0) {
 				clearInterval(this.timer);
+				delete(this.timer);
 				this.gameOver = true;
 				document.querySelector('.game-over-container').classList.add('visible');
 
@@ -500,9 +503,13 @@
 			}
 		};
 
-	tetris.pauseGame = function(){
+	tetris.pauseGame = function(forcePause){
 		this.paused = !this.paused;
+		if(forcePause) {
+			this.paused = true;
+		}
 		clearInterval(this.timer);
+		delete(this.timer);
 		if(this.paused) {
 			document.querySelector('.pause-screen-container').classList.add('visible');
 			}
@@ -545,6 +552,7 @@
 	// Home button action
 	tetris.home = function(){
 		clearInterval(this.timer);
+		delete(this.timer);
 		this.getTopScores();
 		document.querySelector('.page.home').classList.remove('hidden');
 		document.querySelector('.game-over-container').classList.remove('visible');
