@@ -505,7 +505,7 @@
 
 	tetris.pauseGame = function(forcePause){
 		this.paused = !this.paused;
-		if(forcePause) {
+		if(forcePause || this.gameOver) {
 			this.paused = true;
 		}
 		clearInterval(this.timer);
