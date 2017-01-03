@@ -108,7 +108,11 @@
 			return (isTouchDevice) ? 'touchstart' : 'mousedown';
 			})();
 		if(this.touchEvent === 'touchstart'){
+			this.touchEndEvent = 'touchend';
 			document.body.addEventListener('touchstart', function(e){e.preventDefault();}, false);
+		}
+		else{
+			this.touchEndEvent = 'mouseup';
 		}
 
 // Check resolution and add eventlistener for orientation change
@@ -238,10 +242,21 @@
 			}.bind(self), false);
 			this.touchCTRLDrop.addEventListener(this.touchEvent, function(){
 				if(this.paused || this.gameOver) {return;}
+
+				// Long touch force drops the block
+				this.touchReleased = false;
+				window.clearTimeout(this.forceDropTimer);
+				this.forceDropTimer = setTimeout(this.checkForceDrop.bind(this), 300);
+
+
 				this.touchCTRLDrop.classList.add('pressed');
 				fpAnimate.watch({el: this.touchCTRLDrop,execute: function() {this.el.classList.remove('pressed');},unwatch: true});
 				this.dropBlock();
 			}.bind(self), false);
+
+			document.addEventListener(this.touchEndEvent, function(){
+				this.touchReleased = true;
+			}.bind(this), false);
 
 			this.hasInputsBound = true;
 			}
@@ -252,6 +267,13 @@
 		// Start timer
 		this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.gamespeed);
 		};
+
+	tetris.checkForceDrop = function(){
+		if(!this.touchReleased){
+			this.forceDropBlock();
+			this.touchReleased = true;
+		}
+	};
 
 	tetris.moveLeft = function(){
 		if(this.leftPos + this.blockSpacingLeft <= 0) {return;}
@@ -291,8 +313,23 @@
 		var keydown = e.which;
 		if (keydown === 37) {this.moveLeft();}	// Left;
 		if (keydown === 39) {this.moveRight();}	// Right
-		if (keydown === 38) {this.rotate();}		// Up = rotate
-		if (keydown === 40){ this.dropBlock();}	// Down = drop
+		if (keydown === 38) {this.rotate();}	// Up = rotate
+		if (keydown === 40) {this.dropBlock();}	// Down = drop
+		if (keydown === 32) {this.forceDropBlock();} // Space = force drop
+	};
+
+	// Force drop
+	tetris.forceDropBlock = function(){
+		clearInterval(this.timer);
+		var collisionDetect = this.mergeBlock(true);
+		// drop the block as long as it doesn't touch anything
+		while(collisionDetect < 1) {
+			this.line = this.line+(this.gameFieldWidth+1);
+			collisionDetect= this.mergeBlock(true);
+			}
+		this.checkFullLines();
+		this.mergeBlock();
+		this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
 	};
 
 // Check empty space between blocks right and left side. Used for collision detect with wall
@@ -320,7 +357,6 @@
 		};
 
 	tetris.visualizeNextBlock = function(params, nxt){
-		console.log(new Date().getTime());
 		document.querySelector('.next-block').innerHTML = '<svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">'+tetris.blocksSvg[nxt]+'</svg>';
 /*
 		var temp = "";
@@ -374,7 +410,7 @@
 		};
 
 	// Merge arrays (collision detect)
-	tetris.mergeBlock = function() {
+	tetris.mergeBlock = function(test) {
 		this.clearTempArray();
 		this.dropRowPossible = 0; // Collision detect downwards
 		var i = 0,
@@ -386,13 +422,17 @@
 					var combined = this.currentblock[this.rotation][i];
 					this.combinedField[this.line+i+j+this.leftPos] = combined;
 					this.combinedNext = this.gameField[j+this.line+(this.gameFieldWidth+1)+i+this.leftPos];
-					if (this.combinedNext >= 1) {this.dropRowPossible++;}
+					if (this.combinedNext >= 1) {
+						this.dropRowPossible++;
+						if(test){return this.combinedNext;}
+						}
 					}
 				i++;
 				}
 			j = j + this.gameFieldWidth-this.blockArrayWidth;
 			}
 		this.drawGameField();
+		if(test){return this.combinedNext;}
 		};
 
 	tetris.clearTempArray = function() {
@@ -438,7 +478,7 @@
 		};
 
 	// Drop block
-	tetris.dropBlock = function() {
+	tetris.dropBlock = function(fast) {
 		window.requestAnimationFrame(function() {
 			if(this.line < 0 && this.dropRowPossible > 0) {
 				clearInterval(this.timer);
@@ -541,7 +581,7 @@
 			newLine.appendChild(score);
 			newLine.appendChild(lines);
 
-			docFrag.appendChild(newLine)
+			docFrag.appendChild(newLine);
 		}
 		var container = document.querySelector('.highscore-container');
 		// clear top score container, except the the title row
