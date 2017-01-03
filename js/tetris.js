@@ -253,8 +253,9 @@
 				this.dropBlock();
 			}.bind(self), false);
 
-//	register touch end event 
-			document.addEventListener(this.touchEndEvent, function(){
+//	register touch end event
+			document.addEventListener(this.touchEndEvent, function(e){
+				e.preventDefault();
 				this.touchReleased = true;
 			}.bind(this), false);
 
