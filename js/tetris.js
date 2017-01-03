@@ -248,12 +248,12 @@
 				window.clearTimeout(this.forceDropTimer);
 				this.forceDropTimer = setTimeout(this.checkForceDrop.bind(this), 300);
 
-
 				this.touchCTRLDrop.classList.add('pressed');
 				fpAnimate.watch({el: this.touchCTRLDrop,execute: function() {this.el.classList.remove('pressed');},unwatch: true});
 				this.dropBlock();
 			}.bind(self), false);
 
+//	register touch end event 
 			document.addEventListener(this.touchEndEvent, function(){
 				this.touchReleased = true;
 			}.bind(this), false);
