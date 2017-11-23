@@ -46,7 +46,7 @@
 				[155,89,182,1]
 			]
 		},
-		theme : 'vauhtiVille',
+		theme : 'blackAndWhite',
 		blocksSvg: [
 			'<rect x="0" y="9" width="24" height="6"/>',
 			'<rect x="6" y="6" width="12" height="12"/>',
