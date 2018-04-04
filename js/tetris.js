@@ -321,7 +321,7 @@
 
 	// Force drop
 	tetris.forceDropBlock = function(){
-		clearInterval(this.timer);
+	//	clearInterval(this.timer);
 		var collisionDetect = this.mergeBlock(true);
 		// drop the block as long as it doesn't touch anything
 		while(collisionDetect < 1) {
@@ -330,7 +330,7 @@
 			}
 		this.checkFullLines();
 		this.mergeBlock();
-		this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
+//		this.timer = setInterval(function(){this.dropBlock();}.bind(this), this.speedLevel);
 	};
 
 // Check empty space between blocks right and left side. Used for collision detect with wall
@@ -809,7 +809,7 @@ var fpAnimate = {
 
 
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('./tetris_sw.js', {scope: './'})
+	navigator.serviceWorker.register('./tetris/tetris_sw.js', {scope: './'})
 		.then(function(reg) {
 			// registration worked
 			console.log('Registration succeeded. Scope is ' + reg.scope);
