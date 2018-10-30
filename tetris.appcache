@@ -1,8 +1,7 @@
 CACHE MANIFEST
-# 2016-12-29 - 0001
+# 2018-11-29 - 0001
 
 # CSS
-./css/te3s.css
 ./css/tetris.css
 ./css/touch.css
 
