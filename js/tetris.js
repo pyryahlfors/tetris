@@ -115,8 +115,6 @@
 			this.touchEndEvent = 'mouseup';
 		}
 
-
-alert(this.touchEvent);
 // Check resolution and add eventlistener for orientation change
 		var testY;
 		var thisGameContainer = document.querySelector('.page.tetris .gamefield-container').getBoundingClientRect();
