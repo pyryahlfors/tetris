@@ -7,11 +7,11 @@ var urlsToCache = [
     './css/tetris.css',
     './css/touch.css',
     // # Fonts
-    './fonts/space-mono-v1-latin-regular.eot',
-    './fonts/space-mono-v1-latin-regular.svg',
-    './fonts/space-mono-v1-latin-regular.ttf',
-    './fonts/space-mono-v1-latin-regular.woff',
-    './fonts/space-mono-v1-latin-regular.woff2',
+    './font/space-mono-v1-latin-regular.eot',
+    './font/space-mono-v1-latin-regular.svg',
+    './font/space-mono-v1-latin-regular.ttf',
+    './font/space-mono-v1-latin-regular.woff',
+    './font/space-mono-v1-latin-regular.woff2',
     // # Images
     './img/touch-icon-iphone-6-plus.png',
     // # JS
