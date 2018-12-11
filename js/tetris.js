@@ -1,3 +1,6 @@
+// enable vibration support
+navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
 (function(){
 	'use strict';
 
@@ -531,6 +534,8 @@
 				}
 			}
 		if(lines > 0){
+			if (navigator.vibrate) {navigator.vibrate(60);}
+
 			this.score+= Math.pow(lines, 2)* 10;
 			this.totalLines+= lines;
 			this.level = 1 + Math.floor(this.totalLines/10);
