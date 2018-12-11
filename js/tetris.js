@@ -535,7 +535,7 @@ navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mo
 			}
 		if(lines > 0){
 			if (navigator.vibrate) {
-				navigator.vibrate(Array.from({ length: lines }, () => [30, 10]).flat());
+				navigator.vibrate(Array.from({ length: lines }, () => [60, 60]).flat());
 				}
 
 			this.score+= Math.pow(lines, 2)* 10;
